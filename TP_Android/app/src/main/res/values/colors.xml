@@ -3,4 +3,37 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+
+
+    <color name="boutton1">#651616</color>  //Rouge
+    <color name="Boutton1Allume">#C52B2B</color>
+
+    <color name="boutton2">#17276C</color>  // Bleu
+    <color name="Boutton2Allume">#1D3AB7</color>
+
+    <color name="boutton3">#0C4E0C</color>  // Vert
+    <color name="Boutton3Allume">#24C124</color>
+
+    <color name="boutton4">#76711A</color>  // Jaune
+    <color name="Boutton4Allume">#CAC12A</color>
+
+    <color name="boutton5">#13686D</color>  // Cyan
+    <color name="Boutton5Allume">#25B5BD</color>
+
+    <color name="boutton6">#5C1358</color>  // Magenta
+    <color name="Boutton6Allume">#AF25A7</color>
+
+    <color name="boutton7">#966680</color>  //Rose
+    <color name="Boutton7Allume">#EA6DB1</color>
+
+    <color name="boutton8">#8B6211</color>  // Orange
+    <color name="Boutton8Allume">#CB972E</color>
+
+    <color name="boutton9">#51099E</color>  //Violet
+    <color name="Boutton9Allume">#832BE1</color>
+
+    <color name="boutton10">#49474A</color> //Gris
+    <color name="Boutton10Allume">#A4A0A5</color>
+
 </resources>
