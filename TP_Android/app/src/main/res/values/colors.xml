@@ -6,6 +6,10 @@
 
 
 
+    <color name="vert">#309622</color>
+    <color name="vert_eclaire">#58BE4A</color>
+
+
     <color name="boutton1">#651616</color>  //Rouge
     <color name="Boutton1Allume">#C52B2B</color>
 
@@ -35,5 +39,7 @@
 
     <color name="boutton10">#49474A</color> //Gris
     <color name="Boutton10Allume">#A4A0A5</color>
+
+
 
 </resources>
