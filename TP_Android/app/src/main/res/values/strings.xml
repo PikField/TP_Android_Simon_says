@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Menu</string>
+    <string name="nm">Nom</string>
+    <string name="pr">Prénom</string>
+    <string name="ps">Pseudo</string>
+    <string name="mail">Email</string>
+    <string name="mdp">Mot de passe</string>
+    <string name="rmdp">Répétez le mot de passe</string>
+    <string name="inscription">Inscription</string>
 </resources>

@@ -40,7 +40,7 @@ public class jeu extends AppCompatActivity  {
         vie = Mode.Facile.getVie();
 
 
-        chargerLevel(2);
+        chargerLevel(7);
 
 
 
@@ -87,6 +87,7 @@ public class jeu extends AppCompatActivity  {
                 chargerButton(9);
                 break;
             case 7:
+                setContentView(R.layout.level7);
                 chargerButton(10);
                 break;
 
