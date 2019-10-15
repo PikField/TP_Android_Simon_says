@@ -7,4 +7,11 @@
     <string name="mdp">Mot de passe</string>
     <string name="rmdp">Répétez le mot de passe</string>
     <string name="inscription">Inscription</string>
+
+
+
+    <string name="Facile">Facile</string>
+    <string name="Difficile">Difficile</string>
+    <string name="Expert">Expert</string>
+    <string name="Chronos">Chronos</string>
 </resources>
