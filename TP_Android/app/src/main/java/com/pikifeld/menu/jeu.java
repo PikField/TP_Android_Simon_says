@@ -49,14 +49,14 @@ public class jeu extends AppCompatActivity  {
         setContentView(R.layout.level1);
 
         bouttonACliquer = new ArrayList<Integer>();
-        modeActuel = Mode.Facile;
-        vie = Mode.Facile.getVie();
+        modeActuel = Mode.Difficile;
+        vie = modeActuel.getVie();
 
         boutonCliquerUser = new ArrayList<>();
         bouttonACliquer = new ArrayList<>();
 
 
-        chargerLevel(1);
+        chargerLevel(5);
     }
 
     @Override
@@ -116,20 +116,28 @@ public class jeu extends AppCompatActivity  {
 
     private void allumerLumiere(final int num){
         blockButtons();
-
-        new CountDownTimer(TIMER_ENTRE_ECLAIRAGE, 10) {
+        new CountDownTimer(TIMER_ENTRE_ECLAIRAGE/2, 10) {
 
             public void onTick(long millisUntilFinished) {
-                buttons.get(bouttonACliquer.get(num)).buttonLight(jeu.this);
             }
 
             public void onFinish() {
-                buttons.get(bouttonACliquer.get(num)).buttonDark(jeu.this);
-                int i = num + 1 ;
-                if(i<bouttonACliquer.size())
-                    allumerLumiere(i);
+                new CountDownTimer(TIMER_ENTRE_ECLAIRAGE, 10) {
+
+                    public void onTick(long millisUntilFinished) {
+                        buttons.get(bouttonACliquer.get(num)).buttonLight(jeu.this);
+                    }
+
+                    public void onFinish() {
+                        buttons.get(bouttonACliquer.get(num)).buttonDark(jeu.this);
+                        int i = num + 1 ;
+                        if(i<bouttonACliquer.size())
+                            allumerLumiere(i);
+                    }
+                }.start();
             }
         }.start();
+
 
         unBlockButons();
     }
@@ -212,7 +220,7 @@ public class jeu extends AppCompatActivity  {
     private void gameOver(){
         new AlertDialog.Builder(this)
                 .setTitle("Game Over")
-                .setMessage("Vous avez perdu(e) !\n Voulez-vous réessayer (en mode: "+modeActuel.getNomMode()+") ?")
+                .setMessage("Vous avez perdu(e) !\n SCORE: "+(modeActuel.getPoid()*(levelActuel-1))+" \n Voulez-vous réessayer (en mode: "+modeActuel.getNomMode()+") ?")
 
                 // Specifying a listener allows you to take an action before dismissing the dialog.
                 // The dialog is automatically dismissed when a dialog button is clicked.

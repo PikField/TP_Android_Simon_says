@@ -11,15 +11,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.connexion);
 
-        Button boutton = findViewById(R.id.button);
-        boutton.setOnClickListener(new View.OnClickListener() {
+        Button connexion = findViewById(R.id.connexion);
+        connexion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,jeu.class);
+                Intent intent = new Intent(MainActivity.this, jeu.class);
                 startActivity(intent);
             }
         });
+
     }
 }
