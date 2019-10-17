@@ -48,15 +48,28 @@ public class jeu extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.level1);
 
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            modeActuel = bundle.getParcelable("mode");
+            if(modeActuel == null)
+                modeActuel = Mode.Facile;
+
+            levelActuel = bundle.getInt("level");
+            if(levelActuel == 0)
+                levelActuel = 1;
+        }else{
+            modeActuel = Mode.Facile;
+            levelActuel = 1;
+        }
+
+
         bouttonACliquer = new ArrayList<Integer>();
-        modeActuel = Mode.Difficile;
         vie = modeActuel.getVie();
 
         boutonCliquerUser = new ArrayList<>();
         bouttonACliquer = new ArrayList<>();
 
-
-        chargerLevel(5);
+        chargerLevel(levelActuel);
     }
 
     @Override
@@ -64,8 +77,16 @@ public class jeu extends AppCompatActivity  {
         super.onStart();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        Intent intent = new Intent(jeu.this,MainActivity.class);
+        startActivity(intent);
+    }
+
     public void clickBoutton(final int bouttonClicker) {
-        Toast.makeText(this, "bouton cliquer = " + bouttonClicker+" -- "+boutonCliquerUser.size()+"----"+bouttonACliquer.size(), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "bouton cliquer = " + bouttonClicker+" -- "+boutonCliquerUser.size()+"----"+bouttonACliquer.size(), Toast.LENGTH_SHORT).show();
         boutonCliquerUser.add(bouttonClicker);
 
         if (verifierAIdemDebutB(boutonCliquerUser, bouttonACliquer) && boutonCliquerUser.size() == bouttonACliquer.size()) {
@@ -91,7 +112,14 @@ public class jeu extends AppCompatActivity  {
     }
 
     private boolean verifierAIdemDebutB(ArrayList<Integer> A, ArrayList<Integer> B){
-        for(int i=0;i<A.size();i++){
+
+        int size=0;
+        if(A.size() > B.size())
+            size = B.size();
+        else
+            size = A.size();
+
+        for(int i=0;i<size;i++){
             if(A.get(i) != B.get(i))
                 return false;
         }
@@ -100,6 +128,8 @@ public class jeu extends AppCompatActivity  {
 
     public void blockSuivant() throws InterruptedException {
         boutonCliquerUser.clear();
+
+        blockButtons();
 
         if (bouttonACliquer.size() <= modeActuel.getBlocMax()) {
             ajouterUnBlock();
@@ -111,11 +141,9 @@ public class jeu extends AppCompatActivity  {
             if(levelActuel <= 7)
                 chargerLevel(levelActuel);
         }
-
     }
 
     private void allumerLumiere(final int num){
-        blockButtons();
         new CountDownTimer(TIMER_ENTRE_ECLAIRAGE/2, 10) {
 
             public void onTick(long millisUntilFinished) {
@@ -133,13 +161,12 @@ public class jeu extends AppCompatActivity  {
                         int i = num + 1 ;
                         if(i<bouttonACliquer.size())
                             allumerLumiere(i);
+                        else
+                            unBlockButons();
                     }
                 }.start();
             }
         }.start();
-
-
-        unBlockButons();
     }
 
     private void ajouterUnBlock(){
@@ -195,6 +222,10 @@ public class jeu extends AppCompatActivity  {
                     break;
 
             }
+
+            for(int i=0;i<modeActuel.getBlocMin()-1;i++){
+                ajouterUnBlock();
+            }
             new CountDownTimer(TIMER_ENTRE_ECLAIRAGE, 10) {
 
                 public void onTick(long millisUntilFinished) {
@@ -246,12 +277,14 @@ public class jeu extends AppCompatActivity  {
     private void blockButtons(){
         for(int i=0;i<levelActuel+3;i++){
             buttons.get(i).button.setClickable(false);
+            buttons.get(i).button.setEnabled(false);
         }
     }
 
     private void unBlockButons(){
         for(int i=0;i<levelActuel+3;i++){
             buttons.get(i).button.setClickable(true);
+            buttons.get(i).button.setEnabled(true);
         }
     }
 
@@ -290,23 +323,24 @@ public class jeu extends AppCompatActivity  {
             });
         }
 
+
     }
 
     private void setVisualVie(){
 
         switch (vie){
             case 1: findViewById(R.id.imageView4).setVisibility(View.VISIBLE);
-                    findViewById(R.id.imageView5).setVisibility(View.INVISIBLE);
-                    findViewById(R.id.imageView6).setVisibility(View.INVISIBLE);
-                    break;
+                findViewById(R.id.imageView5).setVisibility(View.INVISIBLE);
+                findViewById(R.id.imageView6).setVisibility(View.INVISIBLE);
+                break;
             case 2: findViewById(R.id.imageView4).setVisibility(View.VISIBLE);
-                    findViewById(R.id.imageView5).setVisibility(View.VISIBLE);
-                    findViewById(R.id.imageView6).setVisibility(View.INVISIBLE);
-                    break;
+                findViewById(R.id.imageView5).setVisibility(View.VISIBLE);
+                findViewById(R.id.imageView6).setVisibility(View.INVISIBLE);
+                break;
             case 3: findViewById(R.id.imageView4).setVisibility(View.VISIBLE);
-                    findViewById(R.id.imageView5).setVisibility(View.VISIBLE);
-                    findViewById(R.id.imageView6).setVisibility(View.VISIBLE);
-                    break;
+                findViewById(R.id.imageView5).setVisibility(View.VISIBLE);
+                findViewById(R.id.imageView6).setVisibility(View.VISIBLE);
+                break;
             default:
                 findViewById(R.id.imageView4).setVisibility(View.INVISIBLE);
                 findViewById(R.id.imageView5).setVisibility(View.INVISIBLE);

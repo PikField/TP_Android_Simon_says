@@ -41,7 +41,11 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:text="@string/co"
+<<<<<<< Updated upstream
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+=======
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+>>>>>>> Stashed changes
         android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

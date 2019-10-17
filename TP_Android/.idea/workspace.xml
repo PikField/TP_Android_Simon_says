@@ -13,6 +13,10 @@
         <device id="tv_1080p" />
         <device id="pixel_c" />
         <device id="Nexus 7" />
+<<<<<<< Updated upstream
+=======
+        <device id="Nexus 6" />
+>>>>>>> Stashed changes
       </config>
     </shared>
   </component>
@@ -30,7 +34,6 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_6_API_26" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -38,51 +41,106 @@
       </state>
     </system>
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1044074178">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.3" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="1" />
+          <entry key="xml" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="1" />
+          <entry key="XML" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="64" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="64" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/connexion.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="1156">
               <caret line="68" column="8" selection-start-line="68" selection-start-column="8" selection-end-line="69" selection-end-column="37" />
+=======
+            <state relative-caret-position="1071">
+              <caret line="63" column="38" selection-start-line="63" selection-start-column="38" selection-end-line="63" selection-end-column="38" />
+>>>>>>> Stashed changes
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/connexion.java">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
+            <state relative-caret-position="697">
+              <caret line="49" column="51" selection-start-line="47" selection-start-column="32" selection-end-line="49" selection-end-column="51" />
+=======
+            <state relative-caret-position="275">
+              <caret line="52" column="56" selection-start-line="52" selection-start-column="56" selection-end-line="52" selection-end-column="56" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/connexion.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_foreground.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="49" column="51" selection-start-line="47" selection-start-column="32" selection-end-line="49" selection-end-column="51" />
+<<<<<<< Updated upstream
+            <state relative-caret-position="442">
+              <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
+=======
+            <state relative-caret-position="238">
+              <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
-            </state>
-          </provider>
           <provider editor-type-id="android-manifest" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/inscription.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="380">
               <caret line="72" column="33" selection-start-line="72" selection-start-column="33" selection-end-line="72" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="442">
+              <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/inscription.xml">
+<<<<<<< Updated upstream
           <provider selected="true" editor-type-id="android-designer2" />
           <provider editor-type-id="text-editor">
             <state relative-caret-position="187">
@@ -98,20 +156,31 @@
               <caret line="81" column="40" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="40" />
             </state>
           </provider>
+=======
+          <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor" />
+>>>>>>> Stashed changes
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/jeu.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="391">
               <caret line="46" column="56" selection-start-line="46" selection-start-column="56" selection-end-line="46" selection-end-column="56" />
+=======
+            <state relative-caret-position="952">
+              <caret line="86" selection-start-line="86" selection-end-line="86" />
+>>>>>>> Stashed changes
               <folding>
+                <element signature="method#onStop#0;class#jeu#0" />
                 <element signature="method#clickBoutton#0;class#jeu#0" />
                 <element signature="method#verifierAIdemDebutB#0;class#jeu#0" />
                 <element signature="method#blockSuivant#0;class#jeu#0" />
                 <element signature="method#allumerLumiere#0;class#jeu#0" />
                 <element signature="method#ajouterUnBlock#0;class#jeu#0" />
                 <element signature="method#chargerLevel#0;class#jeu#0" />
+                <element signature="method#gameOver#0;class#jeu#0" />
                 <element signature="method#blockButtons#0;class#jeu#0" />
                 <element signature="method#unBlockButons#0;class#jeu#0" />
                 <element signature="method#chargerButton#0;class#jeu#0" />
@@ -126,10 +195,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/Entity/Mode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="class#1504:1756" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/Entity/SQLite.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="1360">
               <caret line="88" column="21" selection-start-line="88" selection-start-column="21" selection-end-line="88" selection-end-column="21" />
+=======
+            <state relative-caret-position="765">
+              <caret line="53" selection-start-line="53" selection-end-line="53" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -147,8 +234,13 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/level1.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="2125">
               <caret line="125" column="50" selection-start-line="125" selection-start-column="50" selection-end-line="125" selection-end-column="50" />
+=======
+            <state relative-caret-position="2108">
+              <caret line="124" column="50" selection-start-line="124" selection-start-column="50" selection-end-line="124" selection-end-column="50" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -178,27 +270,31 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/button.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/Entity/ButtonTP.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/Entity/Mode.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/level5.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/level1.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/jeu.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/level2.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/connexion.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/Entity/SQLite.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/inscription.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/jeu.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/Entity/Mode.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/level1.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/connexion.xml" />
+<<<<<<< Updated upstream
         <option value="$PROJECT_DIR$/app/src/main/res/layout/inscription.xml" />
+=======
+        <option value="$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/connexion.java" />
+>>>>>>> Stashed changes
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="713" />
-    <option name="width" value="734" />
-    <option name="height" value="867" />
+    <option name="x" value="931" />
+    <option name="y" value="92" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -206,7 +302,22 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< Updated upstream
       <pane id="ProjectPane" />
+=======
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="TP_Android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TP_Android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+>>>>>>> Stashed changes
       <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="AndroidView">
@@ -215,47 +326,6 @@
             <path>
               <item name="TP_Android" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="TP_Android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="TP_Android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="menu" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TP_Android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="menu" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="Entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TP_Android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="TP_Android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="drawable" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="TP_Android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="TP_Android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
           </expand>
           <select />
@@ -269,20 +339,21 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="device.picker.selection" value="Nexus_5X_API_28_x86" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../../save/tp_android_Papier_Besnard/TP_Android_Simon_says/TP_Android" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\adminGRIT\Documents\BESNARD_Andros\2\TP_Android_Simon_says\TP_Android\app\src\main\res\drawable-v24" />
+      <recent name="C:\Users\adminGRIT\Documents\BESNARD_Andros\TP_Android_Simon_says\TP_Android\app\src\main\res\drawable" />
+    </key>
     <key name="android.template.packageName">
       <recent name="com.pikifeld.menu" />
       <recent name="com.pikifeld.menu.Entity" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Matthieu PAPIER\Desktop\ESIEE\I5\tp_android_Papier_Besnard\test\TP_Android_Simon_says\TP_Android\app\src\main\res\drawable" />
       <recent name="C:\Users\adminGRIT\Documents\BESNARD_Andros\TP_Android_Simon_says\TP_Android\app\src\main\res\layout" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\adminGRIT\Documents\BESNARD_Andros\2\TP_Android_Simon_says\TP_Android\app\src\main\res\drawable-v24" />
-      <recent name="C:\Users\adminGRIT\Documents\BESNARD_Andros\TP_Android_Simon_says\TP_Android\app\src\main\res\drawable" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -299,7 +370,6 @@
   </component>
   <component name="RunManager">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
-      <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
@@ -382,12 +452,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< Updated upstream
     <frame x="-8" y="-8" width="1456" height="876" extended-state="7" />
+=======
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+>>>>>>> Stashed changes
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info x="44" y="372" width="513" height="146" id="Palette " order="1" type="FLOATING" />
+<<<<<<< Updated upstream
       <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.12965617" />
+=======
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.17377399" />
+>>>>>>> Stashed changes
       <window_info id="Structure" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
@@ -395,23 +473,32 @@
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Capture Tool" order="8" />
       <window_info id="Favorites" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="0" sideWeight="0.48997134" weight="0.32839838" />
+      <window_info anchor="bottom" id="Run" order="0" sideWeight="0.48933902" weight="0.3275488" />
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.329718" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.32839838" />
       <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" weight="0.32839838" />
       <window_info anchor="bottom" id="Debug" order="4" />
       <window_info anchor="bottom" id="Terminal" order="5" weight="0.32839838" />
+<<<<<<< Updated upstream
       <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50716335" side_tool="true" visible="true" weight="0.1359354" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49928367" weight="0.32839838" />
       <window_info anchor="bottom" id="Build" order="8" sideWeight="0.49283668" visible="true" weight="0.1359354" />
+=======
+      <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.5090618" side_tool="true" visible="true" weight="0.30911064" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49928367" weight="0.32839838" />
+      <window_info anchor="bottom" id="Build" order="8" sideWeight="0.49093816" visible="true" weight="0.30911064" />
+>>>>>>> Stashed changes
       <window_info anchor="bottom" id="Find" order="9" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
-      <window_info anchor="right" id="Preview" order="5" weight="0.3295129" />
+      <window_info anchor="right" id="Preview" order="5" weight="0.32942432" />
     </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/button.xml" />
@@ -453,6 +540,7 @@
           <caret line="176" column="52" selection-start-line="176" selection-start-column="52" selection-end-line="176" selection-end-column="52" />
         </state>
       </provider>
+<<<<<<< Updated upstream
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/Entity/Mode.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -464,6 +552,8 @@
           </folding>
         </state>
       </provider>
+=======
+>>>>>>> Stashed changes
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -506,10 +596,30 @@
           <caret line="109" column="14" selection-start-line="109" selection-start-column="14" selection-end-line="109" selection-end-column="14" />
         </state>
       </provider>
+<<<<<<< Updated upstream
+=======
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/inscription.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="72" column="33" selection-start-line="72" selection-start-column="33" selection-end-line="72" selection-end-column="33" />
+        </state>
+      </provider>
+>>>>>>> Stashed changes
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/layout/level1.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/connexion.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1071">
+          <caret line="63" column="38" selection-start-line="63" selection-start-column="38" selection-end-line="63" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/connexion.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
@@ -522,28 +632,45 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="697">
           <caret line="49" column="51" selection-start-line="47" selection-start-column="32" selection-end-line="49" selection-end-column="51" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_foreground.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
         </state>
       </provider>
-      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/inscription.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/jeu.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="391">
           <caret line="46" column="56" selection-start-line="46" selection-start-column="56" selection-end-line="46" selection-end-column="56" />
+=======
+        <state relative-caret-position="952">
+          <caret line="86" selection-start-line="86" selection-end-line="86" />
+>>>>>>> Stashed changes
           <folding>
+            <element signature="method#onStop#0;class#jeu#0" />
             <element signature="method#clickBoutton#0;class#jeu#0" />
             <element signature="method#verifierAIdemDebutB#0;class#jeu#0" />
             <element signature="method#blockSuivant#0;class#jeu#0" />
             <element signature="method#allumerLumiere#0;class#jeu#0" />
             <element signature="method#ajouterUnBlock#0;class#jeu#0" />
             <element signature="method#chargerLevel#0;class#jeu#0" />
+            <element signature="method#gameOver#0;class#jeu#0" />
             <element signature="method#blockButtons#0;class#jeu#0" />
             <element signature="method#unBlockButons#0;class#jeu#0" />
             <element signature="method#chargerButton#0;class#jeu#0" />
@@ -556,8 +683,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/Entity/SQLite.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/Entity/Mode.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="1360">
           <caret line="88" column="21" selection-start-line="88" selection-start-column="21" selection-end-line="88" selection-end-column="21" />
         </state>
@@ -575,11 +703,35 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2125">
           <caret line="125" column="50" selection-start-line="125" selection-start-column="50" selection-end-line="125" selection-end-column="50" />
+=======
+        <state relative-caret-position="238">
+          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#1504:1756" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/inscription.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/Entity/SQLite.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+>>>>>>> Stashed changes
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/level1.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="380">
           <caret line="72" column="33" selection-start-line="72" selection-start-column="33" selection-end-line="72" selection-end-column="33" />
           <folding>
@@ -600,6 +752,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="81" column="40" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="40" />
+=======
+        <state relative-caret-position="2108">
+          <caret line="124" column="50" selection-start-line="124" selection-start-column="50" selection-end-line="124" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pikifeld/menu/connexion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="52" column="56" selection-start-line="52" selection-start-column="56" selection-end-line="52" selection-end-column="56" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>

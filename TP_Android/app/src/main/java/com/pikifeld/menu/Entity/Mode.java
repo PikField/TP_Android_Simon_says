@@ -1,5 +1,8 @@
 package com.pikifeld.menu.Entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Mode {
 
     private int blocMin, blocMax;
@@ -54,5 +57,38 @@ public class Mode {
 
     public String getNomMode() {
         return nomMode;
+    }
+
+
+    public static final Parcelable.Creator<Mode> CREATOR = new Parcelable.Creator<Mode>() {
+        @Override
+        public Mode createFromParcel(Parcel in) {
+            return new Mode(in);
+        }
+
+        @Override
+        public Mode[] newArray(int size) {
+            return new Mode[size];
+        }
+    };
+
+
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(blocMin);
+        dest.writeInt(blocMax);
+        dest.writeInt(tempsReponse);
+        dest.writeInt(vie);
+        dest.writeDouble(poid);
+        dest.writeString(nomMode);
+    }
+
+
+    public Mode(Parcel in) {
+        blocMin = in.readInt();
+        blocMax = in.readInt();
+        tempsReponse = in.readInt();
+        vie = in.readInt();
+        poid = in.readInt();
+        nomMode = in.readString();
     }
 }
