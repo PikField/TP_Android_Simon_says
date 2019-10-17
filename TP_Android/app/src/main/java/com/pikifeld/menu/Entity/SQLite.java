@@ -17,7 +17,7 @@ public class SQLite extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "Utilisateur";
     public static final String COLUMN_NOM = "nom";
     public static final String COLUMN_PRENOM = "prenom";
-        public static final String COLUMN_SEXE= "sexe";
+    public static final String COLUMN_SEXE= "sexe";
     public static final String COLUMN_AGE = "age";
     public static final String COLUMN_mail = "mail";
     public static final String COLUMN_pseudo = "pseudo";
@@ -30,12 +30,11 @@ public class SQLite extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String text="CREATE TABLE "+ TABLE_NAME + "(" + COLUMN_NOM + " Text," +  COLUMN_PRENOM+ " Text,"+COLUMN_AGE+" Text," +  COLUMN_SEXE+ " Text,\" " +
-                COLUMN_mail +  "Text," +
-                COLUMN_pseudo+ "Text," +
-                COLUMN_mdp +"Text,"+
-                COLUMN_bestscore +"Text,"+
-                " );";
+        String text="CREATE TABLE "+ TABLE_NAME + "(" + COLUMN_NOM + " Text," +  COLUMN_PRENOM+ " Text,"+COLUMN_AGE+" Text," +  COLUMN_SEXE+ " Text," +
+                COLUMN_mail +  " Text," +
+                COLUMN_pseudo+ " Text," +
+                COLUMN_mdp +" Text,"+
+                COLUMN_bestscore +" Text);";
         Log.i("Tag", "........"+text);
         db.execSQL(text);
     }
@@ -47,28 +46,40 @@ public class SQLite extends SQLiteOpenHelper {
 
     }
 
-    public long createUser(String name, String surname, String age,String sexe, String pseudo, String mail, String mdp) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        // Creating content values
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_NOM, name);
-        values.put(COLUMN_PRENOM,surname);
-        values.put(COLUMN_AGE,age);
-        values.put(COLUMN_SEXE, sexe);
-        values.put(COLUMN_mail, mail);
-        values.put(COLUMN_pseudo, pseudo); // VERIFICATION QUE PSEUDO NEXISTE PAS DEJA
-        values.put(COLUMN_mdp, mdp);
-        values.put(COLUMN_bestscore, "0");
-                // insert row in students table
-        long insert = db.insert(TABLE_NAME, null, values);
+    public void onDelete() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery ="DELETE FROM " + TABLE_NAME + " WHERE pseudo=''";
+        Cursor c = db.rawQuery(selectQuery, null);
+    }
 
+    public long createUser(String name, String surname, String age,String sexe, String pseudo, String mail, String mdp) {
+        // Creating content values
+        long insert;
+        String selectQuery = "SELECT " + COLUMN_pseudo + " FROM " + TABLE_NAME+" WHERE pseudo ='"+pseudo+"'" ;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+        if(c.getCount()==0) {
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_NOM, name);
+            values.put(COLUMN_PRENOM, surname);
+            values.put(COLUMN_AGE, age);
+            values.put(COLUMN_SEXE, sexe);
+            values.put(COLUMN_mail, mail);
+            values.put(COLUMN_pseudo, pseudo);
+            values.put(COLUMN_mdp, mdp);
+            values.put(COLUMN_bestscore, "0");
+            // insert row in students table
+            insert = db.insert(TABLE_NAME, null, values);
+        }else {
+            insert = -1;
+        }
         return insert;
     }
 
 
-    public int auhtenticateUser(String pseudobis, String password){
+    public int autenticateUser(String pseudobis, String password){
 
-        String selectQuery = "SELECT " +COLUMN_mdp+ "FROM " + TABLE_NAME+"WHERE pseudo ="+pseudobis ;
+        String selectQuery = "SELECT " +COLUMN_mdp+ " FROM " + TABLE_NAME+" WHERE pseudo ='"+pseudobis+"'" ;
 
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -77,7 +88,8 @@ public class SQLite extends SQLiteOpenHelper {
         if(c.getCount()!= 1) {
             return 1;
         }else {
-            if (c.getString(0) == password) {
+            c.moveToFirst();
+            if (c.getString(0).equals(password)) {
                 return 0;
             } else {
                 return 2;
@@ -85,20 +97,19 @@ public class SQLite extends SQLiteOpenHelper {
         }
     }
 
-    public int isBestScore(String pseudo, String score){
+    public int isBestScore(String pseudo, float score){
 
-        String selectQuery = "SELECT " +COLUMN_bestscore+ "FROM " + TABLE_NAME+"WHERE pseudo ="+pseudo ;
+        String selectQuery = "SELECT " +COLUMN_bestscore+ " FROM " + TABLE_NAME+" WHERE pseudo ='"+pseudo+"'" ;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
+            //Float.parseFloat(c.getFloat(0.0));
+        if(Integer.parseInt(c.getString(0)) < score){
+            String updateQuery =  "UPDATE "+ TABLE_NAME +"SET "+ COLUMN_bestscore+" = '"+ score +"' Where "+ COLUMN_pseudo + " = '" + pseudo +"'";
+            return 1;
+        }else {
+                 return 0;
+    }}
 
-        //if(Integer.parseInt(c.getString())>score){
-        // "UPDATE "+ TABLE_NAME+"SET "+COLUMN_bestscore=score +"Where Column_pseudo=pseudo"
-
-        //}
-
-
-    return 0;
-    }
 
     }
 

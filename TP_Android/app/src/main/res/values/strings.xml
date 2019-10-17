@@ -9,9 +9,16 @@
     <string name="inscription">Inscription</string>
 
 
-
     <string name="Facile">Facile</string>
     <string name="Difficile">Difficile</string>
     <string name="Expert">Expert</string>
     <string name="Chronos">Chronos</string>
+    <string name="co">Connexion</string>
+
+
+    <string-array name="sexe">
+        <item>Homme</item>
+        <item>Femme</item>
+        <item>Autre</item>
+    </string-array>
 </resources>
