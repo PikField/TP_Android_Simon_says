@@ -14,6 +14,8 @@
         android:ems="10"
         android:hint="@string/ps"
         android:inputType="textPersonName"
+        android:textColor="@android:color/background_light"
+        android:textColorHint="@android:color/background_light"
         app:layout_constraintBottom_toTopOf="@+id/editText2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -26,6 +28,8 @@
         android:ems="10"
         android:hint="@string/mdp"
         android:inputType="textPassword"
+        android:textColor="@android:color/background_light"
+        android:textColorHint="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +41,8 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:text="@string/co"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +56,7 @@
         android:background="@android:color/transparent"
         android:text="@string/inscription"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
