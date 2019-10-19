@@ -16,7 +16,7 @@ public class SQLite extends SQLiteOpenHelper {
 
 
     //information of database
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "User.db";
     public static final String TABLE_NAME = "Utilisateur";
     public static final String COLUMN_NOM = "nom";
@@ -27,6 +27,8 @@ public class SQLite extends SQLiteOpenHelper {
     public static final String COLUMN_pseudo = "pseudo";
     public static final String COLUMN_mdp = "mdp";
     public static final String COLUMN_bestscore = "bestscore";
+    public static final String COLUMN_last_save = "last_saved_game";
+    public static final String COLUMN_last_mode_save = "last_saved_mode";
 
     public SQLite(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -38,6 +40,8 @@ public class SQLite extends SQLiteOpenHelper {
                 COLUMN_mail +  " Text," +
                 COLUMN_pseudo+ " Text," +
                 COLUMN_mdp +" Text,"+
+                COLUMN_last_mode_save +" Text,"+
+                COLUMN_last_save +" integer,"+
                 COLUMN_bestscore +" Text);";
         Log.i("Tag", "........"+text);
         db.execSQL(text);
@@ -47,7 +51,6 @@ public class SQLite extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS '" + TABLE_NAME + "'");
         onCreate(db);
-
     }
 
     public void onDelete() {
@@ -72,7 +75,8 @@ public class SQLite extends SQLiteOpenHelper {
             values.put(COLUMN_pseudo, pseudo);
             values.put(COLUMN_mdp, mdp);
             values.put(COLUMN_bestscore, "0");
-            // insert row in students table
+            values.put(COLUMN_last_save, 0);
+            values.put(COLUMN_last_mode_save, "");
             insert = db.insert(TABLE_NAME, null, values);
         }else {
             insert = -1;
@@ -110,13 +114,44 @@ public class SQLite extends SQLiteOpenHelper {
 
         c.moveToFirst();
         if(Float.parseFloat(c.getString(0)) < score){
-            String updateQuery =  "UPDATE "+ TABLE_NAME +" SET "+ COLUMN_bestscore+" = "+ score +" Where "+ COLUMN_pseudo + " = " + pseudo ;
+            String updateQuery =  "UPDATE "+ TABLE_NAME +" SET "+ COLUMN_bestscore+" = "+ score +" Where "+ COLUMN_pseudo + " =  '" + pseudo+"'" ;
             db.execSQL(updateQuery);
             return 1;
         }else {
-             return 0;
+            return 0;
         }
     }
+    public void saveLevel(String pseudo, int level){
+
+        String selectQuery = "UPDATE "+ TABLE_NAME +" SET "+ COLUMN_last_save+" = "+ level +" Where "+ COLUMN_pseudo + " = '" + pseudo+"'" ;
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.execSQL(selectQuery);
+    }
+
+    public int getLastLevel(String pseudo){
+
+        String selectQuery = "SELECT " +COLUMN_last_save+ " FROM " + TABLE_NAME+" WHERE "+ COLUMN_pseudo +" = '"+pseudo+"'" ;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+        c.moveToFirst();
+        return Integer.parseInt(c.getString(0));
+    }
+    public void saveMode(String pseudo, Mode mode){
+
+        String selectQuery = "UPDATE "+ TABLE_NAME +" SET "+ COLUMN_last_mode_save+" = '"+ mode.getNomMode() +"' Where "+ COLUMN_pseudo + " = '" + pseudo+"'" ;
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.execSQL(selectQuery);
+    }
+
+    public String getLastMode(String pseudo){
+
+        String selectQuery = "SELECT " +COLUMN_last_mode_save+ " FROM " + TABLE_NAME+" WHERE "+ COLUMN_pseudo +" = '"+pseudo+"'" ;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+        c.moveToFirst();
+        return c.getString(0);
+    }
+
 
     public ArrayList<User> getAllScores(){
 

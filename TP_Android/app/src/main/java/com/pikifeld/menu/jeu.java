@@ -6,8 +6,11 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -95,6 +98,23 @@ public class jeu extends AppCompatActivity  {
         super.onStart();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        saveLevel();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveLevel();
+    }
+
+    private void saveLevel(){
+        datasource.saveLevel(pseudo,levelActuel);
+        datasource.saveMode(pseudo,modeActuel);
+        System.out.println(" ---- level sauvegarder pour "+pseudo+" ------- "+datasource.getLastLevel(pseudo));
+    }
 
     public void clickBoutton(final int bouttonClicker) {
         // Toast.makeText(this, "bouton cliquer = " + bouttonClicker+" -- "+boutonCliquerUser.size()+"----"+bouttonACliquer.size(), Toast.LENGTH_SHORT).show();
@@ -105,9 +125,12 @@ public class jeu extends AppCompatActivity  {
                                                         +"\n"+ getResources().getText(R.string.score)+": "+ score);
         boutonCliquerUser.add(bouttonClicker);
 
+        if(modeActuel == Mode.Chrono)
+            timer.cancel();
+
         if (verifierAIdemDebutB(boutonCliquerUser, bouttonACliquer) && boutonCliquerUser.size() == bouttonACliquer.size()) {
             boutonCliquerUser.clear();
-            timer.cancel();
+
             try {
                 blockSuivant();
             } catch (InterruptedException e) {
@@ -131,7 +154,7 @@ public class jeu extends AppCompatActivity  {
             gameOver();
         }
     }
-    
+
     private boolean verifierAIdemDebutB(ArrayList<Integer> A, ArrayList<Integer> B){
 
         int size=0;
@@ -161,6 +184,8 @@ public class jeu extends AppCompatActivity  {
             System.out.println(levelActuel);
             if(levelActuel <= 7)
                 chargerLevel(levelActuel);
+            else
+                gameOver();
         }
     }
 
@@ -200,7 +225,8 @@ public class jeu extends AppCompatActivity  {
                             allumerLumiere(i);
                         else{
                             unBlockButons();
-                            timerChronos();
+                            if(modeActuel == Mode.Chrono)
+                                timerChronos();
                         }
                     }
                 }.start();
@@ -294,6 +320,13 @@ public class jeu extends AppCompatActivity  {
 
         datasource.saveBestScore(pseudo,score);
 
+        datasource.saveLevel(pseudo,-1);
+
+        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= 26)
+            vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
+        else
+            vibrator.vibrate(200);
 
         new AlertDialog.Builder(this)
                 .setTitle("Game Over")
@@ -304,14 +337,19 @@ public class jeu extends AppCompatActivity  {
                 .setPositiveButton("Voir tout les score", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(jeu.this,ScoreBoard.class);
+                        intent.putExtra("pseudo",pseudo);
+                        intent.putExtra("mode",modeActuel);
                         startActivity(intent);
+                        finish();
                     }
                 })
                 .setNeutralButton(getResources().getText(R.string.recommencer), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = getIntent();
+                        intent.putExtra("pseudo",pseudo);
                         startActivity(intent);
+                        finish();
                     }
                 })
                 // A null listener allows the button to dismiss the dialog and take no further action.

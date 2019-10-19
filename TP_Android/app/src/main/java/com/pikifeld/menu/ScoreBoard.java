@@ -50,7 +50,9 @@ public class ScoreBoard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ScoreBoard.this, MenuPrincipale.class);
+                intent.putExtra("pseudo",pseudo);
                 startActivity(intent);
+                finish();
             }
         });
         findViewById(R.id.Recommencer).setOnClickListener(new View.OnClickListener() {
@@ -61,6 +63,7 @@ public class ScoreBoard extends AppCompatActivity {
                 jeu.putExtra("level", 1);
                 jeu.putExtra("mode", modeActuel);
                 startActivity(jeu);
+                finish();
             }
         });
 

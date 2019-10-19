@@ -32,4 +32,6 @@
     <string name="Bienvenue">Bienvenue </string>
     <string name="voirScore">Voir le tableau des scores</string>
     <string name="choix_mode">Nouvelle partie ? \nVeuilez choisir un mode de difficulté:</string>
+
+    <string name="reprendreSave">Reprendre ma dernière partie</string>
 </resources>
