@@ -21,4 +21,15 @@
         <item>Femme</item>
         <item>Autre</item>
     </string-array>
+
+    <string name="Erreur">Une erreur est apparue. Veuillez réessayer.</string>
+    <string name="score">Score</string>
+    <string name="level">Niveau</string>
+
+    <string name="quitter">Revenir au menu principal</string>
+    <string name="recommencer">Recommencer</string>
+
+    <string name="Bienvenue">Bienvenue </string>
+    <string name="voirScore">Voir le tableau des scores</string>
+    <string name="choix_mode">Nouvelle partie ? \nVeuilez choisir un mode de difficulté:</string>
 </resources>

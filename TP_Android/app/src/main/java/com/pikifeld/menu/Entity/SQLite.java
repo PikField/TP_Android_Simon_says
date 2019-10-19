@@ -8,6 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 public class SQLite extends SQLiteOpenHelper {
 
 
@@ -79,7 +83,7 @@ public class SQLite extends SQLiteOpenHelper {
 
     public int autenticateUser(String pseudobis, String password){
 
-        String selectQuery = "SELECT " +COLUMN_mdp+ " FROM " + TABLE_NAME+" WHERE pseudo ='"+pseudobis+"'" ;
+        String selectQuery = "SELECT " +COLUMN_mdp+ " FROM " + TABLE_NAME+" WHERE "+ COLUMN_pseudo +" ='"+pseudobis+"'" ;
 
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -97,21 +101,43 @@ public class SQLite extends SQLiteOpenHelper {
         }
     }
 
-    public int isBestScore(String pseudo, float score){
+    public int saveBestScore(String pseudo, float score){
 
-        String selectQuery = "SELECT " +COLUMN_bestscore+ " FROM " + TABLE_NAME+" WHERE pseudo ='"+pseudo+"'" ;
+        String selectQuery = "SELECT " +COLUMN_bestscore+ " FROM " + TABLE_NAME+" WHERE "+ COLUMN_pseudo +" = '"+pseudo+"'" ;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
-            //Float.parseFloat(c.getFloat(0.0));
-        if(Integer.parseInt(c.getString(0)) < score){
-            String updateQuery =  "UPDATE "+ TABLE_NAME +"SET "+ COLUMN_bestscore+" = '"+ score +"' Where "+ COLUMN_pseudo + " = '" + pseudo +"'";
+
+
+        c.moveToFirst();
+        if(Float.parseFloat(c.getString(0)) < score){
+            String updateQuery =  "UPDATE "+ TABLE_NAME +" SET "+ COLUMN_bestscore+" = "+ score +" Where "+ COLUMN_pseudo + " = " + pseudo ;
+            db.execSQL(updateQuery);
             return 1;
         }else {
-                 return 0;
-    }}
-
-
+             return 0;
+        }
     }
+
+    public ArrayList<User> getAllScores(){
+
+        ArrayList<User> users = new ArrayList<User>();
+
+        String selectQuery = "SELECT " +COLUMN_pseudo+","+COLUMN_bestscore+ " FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            User user = new User(cursor.getString(0),Float.parseFloat(cursor.getString(1)));
+            users.add(user);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return users;
+    }
+
+}
 
 
 

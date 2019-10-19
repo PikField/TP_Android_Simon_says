@@ -1,14 +1,17 @@
 package com.pikifeld.menu;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pikifeld.menu.Entity.SQLite;
@@ -48,6 +51,10 @@ public class inscription extends AppCompatActivity {
         dataAdaptater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ageSpin.setAdapter(dataAdaptater);
 
+
+
+
+
         sendButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
@@ -84,4 +91,5 @@ public class inscription extends AppCompatActivity {
 
 
     }
+
 }

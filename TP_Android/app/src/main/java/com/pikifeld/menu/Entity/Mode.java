@@ -3,7 +3,7 @@ package com.pikifeld.menu.Entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Mode {
+public class Mode implements Parcelable{
 
     private int blocMin, blocMax;
     private int tempsReponse;
@@ -72,23 +72,28 @@ public class Mode {
         }
     };
 
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(blocMin);
-        dest.writeInt(blocMax);
-        dest.writeInt(tempsReponse);
-        dest.writeInt(vie);
-        dest.writeDouble(poid);
-        dest.writeString(nomMode);
+    protected Mode(Parcel in){
+        blocMin= in.readInt();
+        blocMax= in.readInt();
+        nomMode = in.readString();
+        poid = in.readDouble();
+        tempsReponse = in.readInt();
+        vie = in.readInt();
     }
 
 
-    public Mode(Parcel in) {
-        blocMin = in.readInt();
-        blocMax = in.readInt();
-        tempsReponse = in.readInt();
-        vie = in.readInt();
-        poid = in.readInt();
-        nomMode = in.readString();
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(blocMin);
+        dest.writeInt(blocMax);
+        dest.writeString(nomMode);
+        dest.writeDouble(poid);
+        dest.writeInt(tempsReponse);
+        dest.writeInt(vie);
     }
 }

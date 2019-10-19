@@ -16,10 +16,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pikifeld.menu.Entity.ButtonTP;
 import com.pikifeld.menu.Entity.Mode;
+import com.pikifeld.menu.Entity.SQLite;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -41,7 +43,11 @@ public class jeu extends AppCompatActivity  {
     ArrayList<Integer> bouttonACliquer;
     ArrayList<Integer> boutonCliquerUser;
 
+    SQLite datasource;
 
+    String pseudo;
+    float score;
+    CountDownTimer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +63,19 @@ public class jeu extends AppCompatActivity  {
             levelActuel = bundle.getInt("level");
             if(levelActuel == 0)
                 levelActuel = 1;
+            
+            pseudo = bundle.getString("pseudo");
+            if(pseudo == null){
+                finish();
+                Toast.makeText(this, getResources().getText(R.string.Erreur), Toast.LENGTH_SHORT).show();
+            }
         }else{
-            modeActuel = Mode.Facile;
-            levelActuel = 1;
+            finish();
+            Toast.makeText(this, getResources().getText(R.string.Erreur), Toast.LENGTH_SHORT).show();
         }
 
+
+        datasource = new SQLite(this);
 
         bouttonACliquer = new ArrayList<Integer>();
         vie = modeActuel.getVie();
@@ -70,6 +84,10 @@ public class jeu extends AppCompatActivity  {
         bouttonACliquer = new ArrayList<>();
 
         chargerLevel(levelActuel);
+
+        score = (float)(modeActuel.getPoid()*(levelActuel-1));
+        ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.level)+": "+levelActuel
+                +"\n"+ getResources().getText(R.string.score)+": "+ score);
     }
 
     @Override
@@ -77,20 +95,19 @@ public class jeu extends AppCompatActivity  {
         super.onStart();
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        Intent intent = new Intent(jeu.this,MainActivity.class);
-        startActivity(intent);
-    }
 
     public void clickBoutton(final int bouttonClicker) {
         // Toast.makeText(this, "bouton cliquer = " + bouttonClicker+" -- "+boutonCliquerUser.size()+"----"+bouttonACliquer.size(), Toast.LENGTH_SHORT).show();
+
+
+        score = (float)(modeActuel.getPoid()*(levelActuel-1));
+        ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.level)+": "+levelActuel
+                                                        +"\n"+ getResources().getText(R.string.score)+": "+ score);
         boutonCliquerUser.add(bouttonClicker);
 
         if (verifierAIdemDebutB(boutonCliquerUser, bouttonACliquer) && boutonCliquerUser.size() == bouttonACliquer.size()) {
             boutonCliquerUser.clear();
+            timer.cancel();
             try {
                 blockSuivant();
             } catch (InterruptedException e) {
@@ -98,19 +115,23 @@ public class jeu extends AppCompatActivity  {
             }
         }else{
             if(!verifierAIdemDebutB(boutonCliquerUser, bouttonACliquer)){
-                chargerLevel(levelActuel);
+                //chargerLevel(levelActuel);
+                boutonCliquerUser.clear();
                 vie--;
-            }
-        }
 
-        if(vie<=0){
-            gameOver();
+                blockButtons();
+                if(vie>0)
+                    allumerLumiere(0);
+            }
         }
 
         setVisualVie();
 
+        if(vie<=0){
+            gameOver();
+        }
     }
-
+    
     private boolean verifierAIdemDebutB(ArrayList<Integer> A, ArrayList<Integer> B){
 
         int size=0;
@@ -143,6 +164,22 @@ public class jeu extends AppCompatActivity  {
         }
     }
 
+    private void timerChronos(){
+
+        timer = new CountDownTimer(bouttonACliquer.size()*2000, 50) {
+
+            public void onTick(long millisUntilFinished) {
+                System.out.println("passage chrono");
+            }
+
+            public void onFinish() {
+                gameOver();
+            }
+        };
+
+        timer.start();
+    }
+
     private void allumerLumiere(final int num){
         new CountDownTimer(TIMER_ENTRE_ECLAIRAGE/2, 10) {
 
@@ -161,8 +198,10 @@ public class jeu extends AppCompatActivity  {
                         int i = num + 1 ;
                         if(i<bouttonACliquer.size())
                             allumerLumiere(i);
-                        else
+                        else{
                             unBlockButons();
+                            timerChronos();
+                        }
                     }
                 }.start();
             }
@@ -177,6 +216,9 @@ public class jeu extends AppCompatActivity  {
 
     private void chargerLevel(int level){
         bouttonACliquer.clear();
+
+        vie = modeActuel.getVie();
+
         if(vie>0) {
             switch (level) {
                 case 1:
@@ -249,29 +291,40 @@ public class jeu extends AppCompatActivity  {
     }
 
     private void gameOver(){
+
+        datasource.saveBestScore(pseudo,score);
+
+
         new AlertDialog.Builder(this)
                 .setTitle("Game Over")
-                .setMessage("Vous avez perdu(e) !\n SCORE: "+(modeActuel.getPoid()*(levelActuel-1))+" \n Voulez-vous réessayer (en mode: "+modeActuel.getNomMode()+") ?")
+                .setMessage("Vous avez perdu(e) !\n SCORE: "+score+" \n ")
 
                 // Specifying a listener allows you to take an action before dismissing the dialog.
                 // The dialog is automatically dismissed when a dialog button is clicked.
-                .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Voir tout les score", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        vie = modeActuel.getVie();
-                        chargerLevel(1);
+                        Intent intent = new Intent(jeu.this,ScoreBoard.class);
+                        startActivity(intent);
                     }
                 })
-
+                .setNeutralButton(getResources().getText(R.string.recommencer), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = getIntent();
+                        startActivity(intent);
+                    }
+                })
                 // A null listener allows the button to dismiss the dialog and take no further action.
-                .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(jeu.this, MainActivity.class);
-                        startActivity(intent);
+                        finish();
                     }
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+
+
     }
 
     private void blockButtons(){

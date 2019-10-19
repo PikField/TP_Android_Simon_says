@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuPrincipale">
+
+    <Button
+        android:id="@+id/modeChronos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/Chronos"
+        app:layout_constraintEnd_toEndOf="@+id/modeExpert"
+        app:layout_constraintStart_toStartOf="@+id/modeExpert"
+        app:layout_constraintTop_toBottomOf="@+id/modeExpert" />
+
+    <Button
+        android:id="@+id/modeExpert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/Expert"
+        app:layout_constraintEnd_toEndOf="@+id/modeDifficile"
+        app:layout_constraintStart_toStartOf="@+id/modeDifficile"
+        app:layout_constraintTop_toBottomOf="@+id/modeDifficile" />
+
+    <Button
+        android:id="@+id/modeDifficile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/Difficile"
+        app:layout_constraintEnd_toEndOf="@+id/modeFacile"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/modeFacile"
+        app:layout_constraintTop_toBottomOf="@+id/modeFacile" />
+
+    <Button
+        android:id="@+id/modeFacile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/Facile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/choixMode" />
+
+    <TextView
+        android:id="@+id/textBienvenue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/choixMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="@string/choix_mode"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/modeFacile"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="@+id/modeFacile"
+        app:layout_constraintTop_toBottomOf="@+id/textBienvenue" />
+
+    <Button
+        android:id="@+id/voirScores"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/voirScore"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</android.support.constraint.ConstraintLayout>

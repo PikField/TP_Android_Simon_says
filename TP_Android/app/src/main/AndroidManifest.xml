@@ -9,19 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".inscription"></activity>
-        <activity android:name=".connexion" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".MenuPrincipale"></activity>
+        <activity android:name=".ScoreBoard" />
+        <activity android:name=".inscription" />
+        <activity
+            android:name=".connexion"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-
-        </intent-filter>
-    </activity>
-        <activity android:name=".jeu" />
-        <activity android:name=".MainActivity">
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".jeu" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

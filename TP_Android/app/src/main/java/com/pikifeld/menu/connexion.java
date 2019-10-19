@@ -14,6 +14,8 @@ import com.pikifeld.menu.Entity.Mode;
 import com.pikifeld.menu.Entity.SQLite;
 
 public class connexion extends AppCompatActivity {
+    String pseudo;
+    String mdp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,19 +29,17 @@ public class connexion extends AppCompatActivity {
 
         final EditText textPseudo = findViewById(R.id.editText);
         final EditText textMDP = findViewById(R.id.editText2);
-        final String[] pseudo = {""};
-        final String[] mdp = {""};
         final Toast toast;
         buttonConnexion.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
-                        pseudo[0]= textPseudo.getText().toString();
-                        mdp[0]= textMDP.getText().toString();
+                        pseudo= textPseudo.getText().toString();
+                        mdp= textMDP.getText().toString();
 
-                        if (pseudo[0]=="" || mdp[0]==""){
+                        if (pseudo=="" || mdp==""){
                             Toast.makeText(getApplicationContext(),"Veuillez rentrer les informations", Toast.LENGTH_SHORT).show();
                                                     }
-                        switch ( data.autenticateUser(pseudo[0], mdp[0])){
+                        switch ( data.autenticateUser(pseudo, mdp)){
                             case 1 :
                                Toast.makeText(getApplicationContext(),"Identifiant incorect", Toast.LENGTH_SHORT).show();
                                         break;
@@ -48,10 +48,9 @@ public class connexion extends AppCompatActivity {
                                 break;
                             case 0 :
                                 Toast.makeText(getApplicationContext(),"Authentification réussi", Toast.LENGTH_SHORT).show();
-                                Intent jeu = new Intent(connexion.this, jeu.class);
-                                jeu.putExtra("pseudo", pseudo);
-                                jeu.putExtra("level",1);
-                                startActivity(jeu);
+                                Intent Menu = new Intent(connexion.this, MenuPrincipale.class);
+                                Menu.putExtra("pseudo", pseudo);
+                                startActivity(Menu);
                             break;
 
                             default :
