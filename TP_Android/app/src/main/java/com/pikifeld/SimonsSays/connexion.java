@@ -1,6 +1,7 @@
 package com.pikifeld.SimonsSays;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,18 +10,28 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.pikifeld.SimonsSays.Entity.SQLite;
 
 public class connexion extends AppCompatActivity {
     String pseudo;
     String mdp;
 
+    private FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        FirebaseApp.initializeApp(this);
+
         final SQLite data = new SQLite(this);
 
+        auth = FirebaseAuth.getInstance();
 
         setContentView(R.layout.connexion);
 
@@ -30,6 +41,7 @@ public class connexion extends AppCompatActivity {
         final EditText textPseudo = findViewById(R.id.editText);
         final EditText textMDP = findViewById(R.id.editText2);
         final Toast toast;
+
         buttonConnexion.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
@@ -38,7 +50,9 @@ public class connexion extends AppCompatActivity {
 
                         if (pseudo=="" || mdp==""){
                             Toast.makeText(getApplicationContext(),"Veuillez rentrer les informations", Toast.LENGTH_SHORT).show();
-                                                    }
+                        }else {
+
+                        /*
                         switch ( data.autenticateUser(pseudo, mdp)){
                             case 1 :
                                Toast.makeText(getApplicationContext(),"Identifiant incorect", Toast.LENGTH_SHORT).show();
@@ -57,7 +71,26 @@ public class connexion extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),"Erreur", Toast.LENGTH_SHORT).show();
                                 break;
                         }
-
+*/
+                            auth.signInWithEmailAndPassword(pseudo, mdp)
+                                    .addOnCompleteListener(connexion.this, new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (!task.isSuccessful()) {
+                                                // there was an error
+                                                if (mdp.length() < 6) {
+                                                    textPseudo.setError("mot de passe trop court !");
+                                                } else {
+                                                    Toast.makeText(connexion.this, "Authentication failed.", Toast.LENGTH_LONG).show();
+                                                }
+                                            } else {
+                                                Intent intent = new Intent(connexion.this, MenuPrincipale.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }
+                                    });
+                        }
 
                     }
                 }

@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MenuPrincipale"></activity>
         <activity android:name=".ScoreBoard" />
-        <activity android:name=".inscription" />
+        <activity android:name=".inscription" ></activity>
         <activity
             android:name=".connexion"
             android:theme="@style/Theme.AppCompat.NoActionBar">

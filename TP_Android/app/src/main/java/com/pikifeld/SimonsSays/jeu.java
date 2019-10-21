@@ -17,9 +17,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.pikifeld.SimonsSays.Entity.ButtonTP;
+import com.pikifeld.SimonsSays.Entity.FirebaseEntity;
 import com.pikifeld.SimonsSays.Entity.Mode;
 import com.pikifeld.SimonsSays.Entity.SQLite;
+import com.pikifeld.SimonsSays.Entity.User;
 
 import java.util.ArrayList;
 
@@ -41,7 +48,7 @@ public class jeu extends AppCompatActivity  {
 
     SQLite datasource;
 
-    String pseudo;
+    User pseudo;
     float score;
     CountDownTimer timer;
 
@@ -60,7 +67,7 @@ public class jeu extends AppCompatActivity  {
             if(levelActuel == 0)
                 levelActuel = 1;
             
-            pseudo = bundle.getString("pseudo");
+            pseudo = bundle.getParcelable("pseudo");
             if(pseudo == null){
                 finish();
                 Toast.makeText(this, getResources().getText(R.string.Erreur), Toast.LENGTH_SHORT).show();
@@ -104,18 +111,21 @@ public class jeu extends AppCompatActivity  {
     }
 
     private void saveLevel(){
-        datasource.saveLevel(pseudo,levelActuel);
-        datasource.saveMode(pseudo,modeActuel);
-        System.out.println(" ---- level sauvegarder pour "+pseudo+" ------- "+datasource.getLastLevel(pseudo));
+        //datasource.saveLevel(pseudo,levelActuel);
+        //datasource.saveMode(pseudo,modeActuel);
+        //System.out.println(" ---- level sauvegarder pour "+pseudo+" ------- "+datasource.getLastLevel(pseudo));
+        FirebaseEntity.saveLevelEnCours(levelActuel,modeActuel);
+
+
     }
 
     public void clickBoutton(final int bouttonClicker) {
         // Toast.makeText(this, "bouton cliquer = " + bouttonClicker+" -- "+boutonCliquerUser.size()+"----"+bouttonACliquer.size(), Toast.LENGTH_SHORT).show();
 
-
+/*
         ToneGenerator toneGenerator = new ToneGenerator(6,100);
         toneGenerator.startTone(buttons.get(bouttonClicker).getTone(),200);
-
+*/
         score = (float)(modeActuel.getPoid()*(levelActuel-1));
         ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.level)+": "+levelActuel
                                                         +"\n"+ getResources().getText(R.string.score)+": "+ score);
@@ -321,9 +331,11 @@ public class jeu extends AppCompatActivity  {
 
     private void gameOver(){
 
-        datasource.saveBestScore(pseudo,score);
+        //datasource.saveBestScore(pseudo,score);
 
-        datasource.saveLevel(pseudo,-1);
+        //datasource.saveLevel(pseudo,-1);
+
+        FirebaseEntity.changeBestscore(score);
 
         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         if (Build.VERSION.SDK_INT >= 26)
