@@ -53,7 +53,7 @@ public class MenuPrincipale extends AppCompatActivity {
                     public void onClick(View v) {
 
                         Intent jeu = new Intent(MenuPrincipale.this, jeu.class);
-                        jeu.putExtra("pseudo", user);
+                        jeu.putExtra("user", user);
                         jeu.putExtra("level",1);
                         jeu.putExtra("mode", Mode.Facile);
                         startActivity(jeu);
@@ -64,7 +64,7 @@ public class MenuPrincipale extends AppCompatActivity {
                     public void onClick(View v) {
 
                         Intent jeu = new Intent(MenuPrincipale.this, jeu.class);
-                        jeu.putExtra("pseudo", user);
+                        jeu.putExtra("user", user);
                         jeu.putExtra("level",1);
                         jeu.putExtra("mode", Mode.Difficile);
                         startActivity(jeu);
@@ -75,7 +75,7 @@ public class MenuPrincipale extends AppCompatActivity {
                     public void onClick(View v) {
 
                         Intent jeu = new Intent(MenuPrincipale.this, jeu.class);
-                        jeu.putExtra("pseudo", user);
+                        jeu.putExtra("user", user);
                         jeu.putExtra("level",1);
                         jeu.putExtra("mode", Mode.Expert);
                         startActivity(jeu);
@@ -86,7 +86,7 @@ public class MenuPrincipale extends AppCompatActivity {
                     public void onClick(View v) {
 
                         Intent jeu = new Intent(MenuPrincipale.this, jeu.class);
-                        jeu.putExtra("pseudo", user);
+                        jeu.putExtra("user", user);
                         jeu.putExtra("level",1);
                         jeu.putExtra("mode", Mode.Chrono);
                         startActivity(jeu);
@@ -97,7 +97,7 @@ public class MenuPrincipale extends AppCompatActivity {
                     public void onClick(View v) {
 
                         Intent jeu = new Intent(MenuPrincipale.this, jeu.class);
-                        jeu.putExtra("pseudo", user);
+                        jeu.putExtra("user", user);
                         jeu.putExtra("level",user.getLastLevel());
 
                         if(user.getLastMode().equals(Mode.Facile.getNomMode()))
@@ -118,7 +118,7 @@ public class MenuPrincipale extends AppCompatActivity {
                     public void onClick(View v) {
 
                         Intent scoreBoard = new Intent(MenuPrincipale.this, ScoreBoard.class);
-                        scoreBoard.putExtra("pseudo", user);
+                        scoreBoard.putExtra("user", user);
                         startActivity(scoreBoard);
                     }
                 });
@@ -135,7 +135,7 @@ public class MenuPrincipale extends AppCompatActivity {
         /*
         datasource = new SQLite(this);
 
-        if(datasource.getLastMode(pseudo) == "" || datasource.getLastLevel(pseudo) == 0)
+        if(datasource.getLastMode(user) == "" || datasource.getLastLevel(user) == 0)
             findViewById(R.id.reprendreSave).setVisibility(View.GONE);
 */
 

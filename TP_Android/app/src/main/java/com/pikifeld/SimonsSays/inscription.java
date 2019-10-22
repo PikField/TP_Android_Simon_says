@@ -118,9 +118,9 @@ public class inscription extends AppCompatActivity {
 
 /*
 
-                                long value = data.createUser(name, surname, age, sexe, pseudo, mail, mdp);
+                                long value = data.createUser(name, surname, age, sexe, user, mail, mdp);
                                 if (value==-1){
-                                    Toast.makeText(getApplicationContext(),"Le pseudo choisit existe déjà, veuiller en utiliser un autre", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"Le user choisit existe déjà, veuiller en utiliser un autre", Toast.LENGTH_SHORT).show();
                                  }else{
                                     Toast.makeText(getApplicationContext(),"Inscription réussi", Toast.LENGTH_SHORT).show();
 

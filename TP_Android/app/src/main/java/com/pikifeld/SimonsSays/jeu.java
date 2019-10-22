@@ -17,11 +17,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.pikifeld.SimonsSays.Entity.ButtonTP;
 import com.pikifeld.SimonsSays.Entity.FirebaseEntity;
 import com.pikifeld.SimonsSays.Entity.Mode;
@@ -48,7 +43,7 @@ public class jeu extends AppCompatActivity  {
 
     SQLite datasource;
 
-    User pseudo;
+    User user;
     float score;
     CountDownTimer timer;
 
@@ -67,8 +62,8 @@ public class jeu extends AppCompatActivity  {
             if(levelActuel == 0)
                 levelActuel = 1;
             
-            pseudo = bundle.getParcelable("pseudo");
-            if(pseudo == null){
+            user = bundle.getParcelable("user");
+            if(user == null){
                 finish();
                 Toast.makeText(this, getResources().getText(R.string.Erreur), Toast.LENGTH_SHORT).show();
             }
@@ -111,9 +106,9 @@ public class jeu extends AppCompatActivity  {
     }
 
     private void saveLevel(){
-        //datasource.saveLevel(pseudo,levelActuel);
-        //datasource.saveMode(pseudo,modeActuel);
-        //System.out.println(" ---- level sauvegarder pour "+pseudo+" ------- "+datasource.getLastLevel(pseudo));
+        //datasource.saveLevel(user,levelActuel);
+        //datasource.saveMode(user,modeActuel);
+        //System.out.println(" ---- level sauvegarder pour "+user+" ------- "+datasource.getLastLevel(user));
         FirebaseEntity.saveLevelEnCours(levelActuel,modeActuel);
 
 
@@ -331,9 +326,9 @@ public class jeu extends AppCompatActivity  {
 
     private void gameOver(){
 
-        //datasource.saveBestScore(pseudo,score);
+        //datasource.saveBestScore(user,score);
 
-        //datasource.saveLevel(pseudo,-1);
+        //datasource.saveLevel(user,-1);
 
         FirebaseEntity.changeBestscore(score);
 
@@ -352,7 +347,7 @@ public class jeu extends AppCompatActivity  {
                 .setPositiveButton("Voir tout les score", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(jeu.this,ScoreBoard.class);
-                        intent.putExtra("pseudo",pseudo);
+                        intent.putExtra("user", user);
                         intent.putExtra("mode",modeActuel);
                         startActivity(intent);
                         finish();
@@ -362,7 +357,7 @@ public class jeu extends AppCompatActivity  {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = getIntent();
-                        intent.putExtra("pseudo",pseudo);
+                        intent.putExtra("user", user);
                         startActivity(intent);
                         finish();
                     }

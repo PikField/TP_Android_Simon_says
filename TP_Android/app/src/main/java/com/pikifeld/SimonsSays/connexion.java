@@ -10,16 +10,26 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.IdpResponse;
+import com.firebase.ui.auth.util.ExtraConstants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.pikifeld.SimonsSays.Entity.SQLite;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class connexion extends AppCompatActivity {
     String pseudo;
     String mdp;
+
+    private static final int RC_SIGN_IN = 123;
 
     private FirebaseAuth auth;
 
@@ -53,7 +63,7 @@ public class connexion extends AppCompatActivity {
                         }else {
 
                         /*
-                        switch ( data.autenticateUser(pseudo, mdp)){
+                        switch ( data.autenticateUser(user, mdp)){
                             case 1 :
                                Toast.makeText(getApplicationContext(),"Identifiant incorect", Toast.LENGTH_SHORT).show();
                                         break;
@@ -63,7 +73,7 @@ public class connexion extends AppCompatActivity {
                             case 0 :
                                 Toast.makeText(getApplicationContext(),"Authentification réussi", Toast.LENGTH_SHORT).show();
                                 Intent Menu = new Intent(connexion.this, MenuPrincipale.class);
-                                Menu.putExtra("pseudo", pseudo);
+                                Menu.putExtra("user", user);
                                 startActivity(Menu);
                             break;
 
@@ -104,6 +114,8 @@ public class connexion extends AppCompatActivity {
                     }
                 }
         );
-    }
 
+
+
+    }
 }
