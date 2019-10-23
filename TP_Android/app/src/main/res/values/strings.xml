@@ -16,6 +16,10 @@
     <string name="co">Connexion</string>
 
 
+    <string name="homme">Homme</string>>
+    <string name="femme">Femme</string>
+    <string name="autre">Autre</string>
+
     <string-array name="sexe">
         <item>Homme</item>
         <item>Femme</item>
@@ -25,6 +29,7 @@
     <string name="Erreur">Une erreur est apparue. Veuillez réessayer.</string>
     <string name="score">Score</string>
     <string name="level">Niveau</string>
+    <string name="mdoe">Mode </string>
 
     <string name="quitter">Revenir au menu principal</string>
     <string name="recommencer">Recommencer</string>

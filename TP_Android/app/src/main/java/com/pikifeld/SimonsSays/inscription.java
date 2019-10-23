@@ -66,6 +66,22 @@ public class inscription extends AppCompatActivity {
         ageSpin.setAdapter(dataAdaptater);
 
 
+        ArrayAdapter<String> ageAdapt = new ArrayAdapter<String>(this, R.layout.item_spinner, listAge);
+
+        //simple_spinner_dropdown_item
+        ageSpin.setAdapter(ageAdapt);
+
+        ageAdapt.setDropDownViewResource(R.layout.dropdown_spinner);
+        ageSpin.setAdapter(ageAdapt);
+
+
+
+        ArrayAdapter sexeAdapt = ArrayAdapter.createFromResource(
+                this,
+                R.array.sexe,
+                R.layout.item_spinner);
+        sexeAdapt.setDropDownViewResource(R.layout.dropdown_spinner);
+        sexeSpin.setAdapter(sexeAdapt);
 
 
 
@@ -97,8 +113,6 @@ public class inscription extends AppCompatActivity {
                                                     mAuth = FirebaseAuth.getInstance();
                                                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                                                     DatabaseReference myRef = database.getReference("utilisateur");
-
-
 
                                                     User userLocal = new User(name,surname,sexe,pseudo,0,Integer.parseInt(age),0);
 

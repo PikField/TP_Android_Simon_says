@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pikifeld.SimonsSays">
 
-
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,13 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_1_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MenuPrincipale"></activity>
+        <activity android:name=".Profil"></activity>
+        <activity android:name=".MenuPrincipale" />
         <activity android:name=".ScoreBoard" />
-        <activity android:name=".inscription" ></activity>
+        <activity android:name=".inscription" />
         <activity
             android:name=".connexion"
             android:theme="@style/Theme.AppCompat.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

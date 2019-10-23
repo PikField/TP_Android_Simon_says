@@ -33,6 +33,11 @@ public class MenuPrincipale extends AppCompatActivity {
         setContentView(R.layout.activity_menu_principale);
 
 
+        update();
+
+    }
+
+    private void update(){
         auth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("utilisateur");
@@ -122,24 +127,25 @@ public class MenuPrincipale extends AppCompatActivity {
                         startActivity(scoreBoard);
                     }
                 });
+
+                ((Button) findViewById(R.id.Profil)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent scoreBoard = new Intent(MenuPrincipale.this, Profil.class);
+                        startActivity(scoreBoard);
+                    }
+                });
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+    }
 
-
-
-
-
-        /*
-        datasource = new SQLite(this);
-
-        if(datasource.getLastMode(user) == "" || datasource.getLastLevel(user) == 0)
-            findViewById(R.id.reprendreSave).setVisibility(View.GONE);
-*/
-
-
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        update();
     }
 }

@@ -23,6 +23,7 @@ import com.pikifeld.SimonsSays.Entity.SQLite;
 import com.pikifeld.SimonsSays.Entity.User;
 import com.pikifeld.SimonsSays.adapter.ScoreAdapter;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 public class ScoreBoard extends AppCompatActivity {
@@ -40,7 +41,7 @@ public class ScoreBoard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score_board);
 
-        database = new SQLite(this);
+        //database = new SQLite(this);
 
 
        users = new ArrayList<>();//= database.getAllScores();
@@ -49,6 +50,7 @@ public class ScoreBoard extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         Query myRef = database.getReference("utilisateur").orderByChild("bestscore");
+
 
         final ListView listView = (ListView)findViewById(R.id.listScore);
 
@@ -59,6 +61,7 @@ public class ScoreBoard extends AppCompatActivity {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     users.add(postSnapshot.getValue(User.class));
                 }
+                users = retournerListe(users);
 
                 ScoreAdapter adapter = new ScoreAdapter(ScoreBoard.this,users);
                 listView.setAdapter(adapter);
@@ -68,7 +71,6 @@ public class ScoreBoard extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
                 Log.w("TEST", "loadPost:onCancelled", databaseError.toException());
-                // ...
             }
         });
 
@@ -106,5 +108,13 @@ public class ScoreBoard extends AppCompatActivity {
             }
         });
 
+    }
+
+    protected ArrayList<User> retournerListe(ArrayList<User> liste){
+        ArrayList<User> listeARetourner = new ArrayList<>();
+        for(int i=liste.size()-1;i>=0;i--){
+            listeARetourner.add(liste.get(i));
+        }
+        return listeARetourner;
     }
 }
