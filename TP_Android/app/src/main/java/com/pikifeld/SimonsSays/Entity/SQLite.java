@@ -155,7 +155,7 @@ public class SQLite extends SQLiteOpenHelper {
 
         ArrayList<User> users = new ArrayList<User>();
 
-        String selectQuery = "SELECT " +COLUMN_pseudo+","+COLUMN_bestscore+ " FROM " + TABLE_NAME;
+        String selectQuery = "SELECT " +COLUMN_pseudo+","+COLUMN_bestscore+ " FROM " + TABLE_NAME+" ORDER BY "+COLUMN_bestscore+" DESC";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
