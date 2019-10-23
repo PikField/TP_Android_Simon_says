@@ -7,14 +7,14 @@
 
 
     <color name="vert">#309622</color>
-    <color name="vert_eclaire">#58BE4A</color>
+    <color name="vert_eclaire">#C2EBBC</color>
 
 
     <color name="boutton1">#651616</color>  //Rouge
     <color name="Boutton1Allume">#C52B2B</color>
 
     <color name="boutton2">#17276C</color>  // Bleu
-    <color name="Boutton2Allume">#1D3AB7</color>
+    <color name="Boutton2Allume">#849AF7</color>
 
     <color name="boutton3">#0C4E0C</color>  // Vert
     <color name="Boutton3Allume">#24C124</color>
@@ -35,7 +35,7 @@
     <color name="Boutton8Allume">#CB972E</color>
 
     <color name="boutton9">#51099E</color>  //Violet
-    <color name="Boutton9Allume">#832BE1</color>
+    <color name="Boutton9Allume">#BE8FEE</color>
 
     <color name="boutton10">#49474A</color> //Gris
     <color name="Boutton10Allume">#A4A0A5</color>

@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MenuPrincipale"></activity>
+        <activity android:name=".Profil"></activity>
         <activity android:name=".ScoreBoard" />
         <activity android:name=".inscription" />
         <activity

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -170,6 +171,35 @@ public class SQLite extends SQLiteOpenHelper {
         return users;
     }
 
+    public User getProfile(String pseudo){
+        User user;
+        String selectQuery = "SELECT " +COLUMN_NOM+" , "+COLUMN_PRENOM+" , "+COLUMN_SEXE+" , "+COLUMN_pseudo+" , "+COLUMN_mail+" , "+COLUMN_bestscore+" , " + COLUMN_AGE+" FROM " + TABLE_NAME+" WHERE "+COLUMN_pseudo+" ='"+ pseudo+ "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        cursor.moveToFirst();
+        user= new User(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),Float.parseFloat(cursor.getString(5)),Integer.parseInt(cursor.getString(6)));
+        return user;
+    }
+
+    public int changeProfile(String nom, String prenom, String age, String sexe, String pseudo, String mail, String mdp){
+        String selectQuery = "SELECT " +COLUMN_mdp + " FROM " + TABLE_NAME+" WHERE "+COLUMN_pseudo+" ='"+ pseudo+ "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        cursor.moveToFirst();
+        String password = cursor.getString(0).toString();
+        String finalpw="";
+        if(mdp.equals("")){
+            finalpw=password;
+        }else {
+            finalpw=mdp;
+        }
+
+        String updateQuery ="UPDATE "+TABLE_NAME+" SET "+COLUMN_NOM+" ='"+nom+"',"+COLUMN_PRENOM+" ='"+prenom+"',"+COLUMN_AGE+" ='"+age+"',"+COLUMN_SEXE+" ='"+sexe+"',"+COLUMN_pseudo+" ='"+pseudo+"',"+COLUMN_mail+" ='"+mail+"',"+COLUMN_mdp+"='"+finalpw+"' WHERE "+COLUMN_pseudo+" ='"+pseudo+"'";
+        db.execSQL(updateQuery);
+
+
+        return 0;
+    }
 }
 
 

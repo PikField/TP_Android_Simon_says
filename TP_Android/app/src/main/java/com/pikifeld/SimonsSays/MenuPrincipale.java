@@ -105,5 +105,15 @@ public class MenuPrincipale extends AppCompatActivity {
                 startActivity(scoreBoard);
             }
         });
+
+        ((Button) findViewById(R.id.profil)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent profil = new Intent(MenuPrincipale.this, Profil.class);
+                profil.putExtra("pseudo", pseudo);
+                startActivity(profil);
+            }
+        });
     }
 }
