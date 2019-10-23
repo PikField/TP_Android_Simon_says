@@ -113,8 +113,8 @@ public class jeu extends AppCompatActivity  {
         // Toast.makeText(this, "bouton cliquer = " + bouttonClicker+" -- "+boutonCliquerUser.size()+"----"+bouttonACliquer.size(), Toast.LENGTH_SHORT).show();
 
 
-        ToneGenerator toneGenerator = new ToneGenerator(6,100);
-        toneGenerator.startTone(buttons.get(bouttonClicker).getTone(),200);
+        //ToneGenerator toneGenerator = new ToneGenerator(6,100);
+        //toneGenerator.startTone(buttons.get(bouttonClicker).getTone(),200);
 
         score = (float)(modeActuel.getPoid()*(levelActuel-1));
         ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.level)+": "+levelActuel
@@ -203,7 +203,7 @@ public class jeu extends AppCompatActivity  {
 
     private void allumerLumiere(final int num){
 
-        final ToneGenerator toneGenerator = new ToneGenerator(6,100);
+//        final ToneGenerator toneGenerator = new ToneGenerator(6,100);
 
 
         new CountDownTimer(TIMER_ENTRE_ECLAIRAGE/2, 10) {
@@ -213,7 +213,7 @@ public class jeu extends AppCompatActivity  {
 
             public void onFinish() {
 
-                toneGenerator.startTone(buttons.get(num).getTone());
+                //toneGenerator.startTone(buttons.get(num).getTone());
                 new CountDownTimer(TIMER_ENTRE_ECLAIRAGE, 10) {
 
                     public void onTick(long millisUntilFinished) {
@@ -223,7 +223,7 @@ public class jeu extends AppCompatActivity  {
                     public void onFinish() {
                         buttons.get(bouttonACliquer.get(num)).buttonDark(jeu.this);
                         int i = num + 1 ;
-                        toneGenerator.stopTone();
+                       // toneGenerator.stopTone();
                         if(i<bouttonACliquer.size())
                             allumerLumiere(i);
                         else{

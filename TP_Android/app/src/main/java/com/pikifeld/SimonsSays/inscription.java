@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,10 +20,12 @@ import java.util.ArrayList;
 
 
 
-public class inscription extends AppCompatActivity {
+public class inscription extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     EditText textNom, textPrenom, textPseudo, textMail, textMdp, textMdpBis;
     Button sendButton;
     Spinner sexeSpin, ageSpin;
+
+
     SQLite data = new SQLite(this);
 
 
@@ -38,7 +41,7 @@ public class inscription extends AppCompatActivity {
         textNom= findViewById(R.id.editText3);
         textPrenom= findViewById(R.id.editText4);
         textPseudo= findViewById(R.id.editText6);
-         textMail= findViewById(R.id.editText5);
+        textMail= findViewById(R.id.editText5);
         textMdp= findViewById(R.id.editText7);
         textMdpBis= findViewById(R.id.editText8);
         ageSpin=findViewById(R.id.spinner2);
@@ -50,12 +53,24 @@ public class inscription extends AppCompatActivity {
             listAge.add(String.valueOf(k));
         }
 
-        ArrayAdapter<String> dataAdaptater = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listAge);
-        dataAdaptater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ageSpin.setAdapter(dataAdaptater);
+        ArrayAdapter<String> ageAdapt = new ArrayAdapter<String>(this, R.layout.item_spinner, listAge);
+
+        //simple_spinner_dropdown_item
+        ageSpin.setAdapter(ageAdapt);
+
+        ageAdapt.setDropDownViewResource(R.layout.dropdown_spinner);
+        ageSpin.setAdapter(ageAdapt);
+        ageSpin.setOnItemSelectedListener(this);
 
 
 
+        ArrayAdapter sexeAdapt = ArrayAdapter.createFromResource(
+                this,
+                R.array.sexe,
+                R.layout.item_spinner);
+        sexeAdapt.setDropDownViewResource(R.layout.dropdown_spinner);
+        sexeSpin.setAdapter(sexeAdapt);
+        sexeSpin.setOnItemSelectedListener(this);
 
 
         sendButton.setOnClickListener(
@@ -103,4 +118,13 @@ public class inscription extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+       // Toast.makeText(this, adapterView.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }
