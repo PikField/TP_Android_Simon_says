@@ -1,5 +1,6 @@
 package com.pikifeld.SimonsSays;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -33,13 +34,15 @@ public class connexion extends AppCompatActivity {
 
     private FirebaseAuth auth;
 
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         FirebaseApp.initializeApp(this);
 
-        final SQLite data = new SQLite(this);
+        //final SQLite data = new SQLite(this);
 
         auth = FirebaseAuth.getInstance();
 
@@ -81,27 +84,36 @@ public class connexion extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),"Erreur", Toast.LENGTH_SHORT).show();
                                 break;
                         }
+
 */
+                            progressDialog=new ProgressDialog(connexion.this);
+                            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                            progressDialog.setMessage("Accès à votre compte...");
+                            progressDialog.setIndeterminate(true);
+                            progressDialog.show();
+
+
                             auth.signInWithEmailAndPassword(pseudo, mdp)
                                     .addOnCompleteListener(connexion.this, new OnCompleteListener<AuthResult>() {
+
                                         @Override
                                         public void onComplete(@NonNull Task<AuthResult> task) {
+                                            progressDialog.dismiss();
                                             if (!task.isSuccessful()) {
                                                 // there was an error
                                                 if (mdp.length() < 6) {
-                                                    textPseudo.setError("mot de passe trop court !");
+                                                    textMDP.setError(getResources().getText(R.string.mot_de_passe_incorrect));
+                                                    Toast.makeText(connexion.this, getResources().getText(R.string.authentification_incorrect), Toast.LENGTH_LONG).show();
                                                 } else {
-                                                    Toast.makeText(connexion.this, "Authentication failed.", Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(connexion.this, getResources().getText(R.string.authentification_incorrect), Toast.LENGTH_LONG).show();
                                                 }
                                             } else {
                                                 Intent intent = new Intent(connexion.this, MenuPrincipale.class);
                                                 startActivity(intent);
-                                                finish();
                                             }
                                         }
                                     });
                         }
-
                     }
                 }
         );

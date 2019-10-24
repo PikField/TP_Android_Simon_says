@@ -37,11 +37,24 @@ public class MenuPrincipale extends AppCompatActivity {
 
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        update();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        update();
+    }
+
     private void update(){
         auth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("utilisateur");
-        myRef.child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+        myRef.child(auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 System.out.println(snapshot.getValue());  //prints "Do you have data? You'll love Firebase."
@@ -51,6 +64,9 @@ public class MenuPrincipale extends AppCompatActivity {
 
                 if(user.getLastLevel()==0)
                     findViewById(R.id.reprendreSave).setVisibility(View.GONE);
+                else
+                    findViewById(R.id.reprendreSave).setVisibility(View.VISIBLE);
+
 
 
                 ((Button) findViewById(R.id.modeFacile)).setOnClickListener(new View.OnClickListener() {
@@ -143,9 +159,4 @@ public class MenuPrincipale extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        update();
-    }
 }

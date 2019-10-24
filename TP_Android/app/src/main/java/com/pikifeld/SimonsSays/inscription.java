@@ -92,7 +92,7 @@ public class inscription extends AppCompatActivity {
                         final String surname=textPrenom.getText().toString();
                         final String pseudo=textPseudo.getText().toString();
                         String  mail=textMail.getText().toString();
-                        String  mdp=textMdp.getText().toString();
+                        final String  mdp=textMdp.getText().toString();
                         String mdpBis=textMdpBis.getText().toString();
                         final String age = ageSpin.getSelectedItem().toString();
                         final String sexe =sexeSpin.getSelectedItem().toString();
@@ -123,9 +123,11 @@ public class inscription extends AppCompatActivity {
                                                     startActivity(intent);
 
                                                 } else {
-                                                    // If sign in fails, display a message to the user.
-                                                    Toast.makeText(inscription.this, "Authentication failed.",
-                                                            Toast.LENGTH_SHORT).show();
+                                                    if (mdp.length() < 6) {
+                                                        textPseudo.setError(getResources().getText(R.string.mot_de_passe_incorrect));
+                                                    } else {
+                                                        Toast.makeText(inscription.this, getResources().getText(R.string.authentification_incorrect), Toast.LENGTH_LONG).show();
+                                                    }
                                                 }
                                             }
                                         });

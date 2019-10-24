@@ -59,12 +59,28 @@ public class Profil extends AppCompatActivity {
         ageSpin.setAdapter(dataAdaptater);
 
 
+        ArrayAdapter<String> ageAdapt = new ArrayAdapter<String>(this, R.layout.item_spinner, listAge);
+
+        //simple_spinner_dropdown_item
+        ageSpin.setAdapter(ageAdapt);
+
+        ageAdapt.setDropDownViewResource(R.layout.dropdown_spinner);
+        ageSpin.setAdapter(ageAdapt);
+
+
+
+        ArrayAdapter sexeAdapt = ArrayAdapter.createFromResource(
+                this,
+                R.array.sexe,
+                R.layout.item_spinner);
+        sexeAdapt.setDropDownViewResource(R.layout.dropdown_spinner);
+        sexeSpin.setAdapter(sexeAdapt);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         final DatabaseReference myRef = database.getReference("utilisateur").child(mAuth.getCurrentUser().getUid());
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 user = dataSnapshot.getValue(User.class);

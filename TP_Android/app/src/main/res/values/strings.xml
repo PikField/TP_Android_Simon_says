@@ -39,4 +39,7 @@
     <string name="choix_mode">Nouvelle partie ? \nVeuilez choisir un mode de difficulté:</string>
 
     <string name="reprendreSave">Reprendre ma dernière partie</string>
+
+    <string name="mot_de_passe_incorrect">Mot de passe trop court !</string>
+    <string name="authentification_incorrect">Authentification incorrect</string>
 </resources>

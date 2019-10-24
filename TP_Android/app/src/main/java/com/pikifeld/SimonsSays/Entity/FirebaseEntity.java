@@ -26,13 +26,13 @@ public class FirebaseEntity {
 
         final DatabaseReference myRef = database.getReference("utilisateur");
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                    if(Float.parseFloat(dataSnapshot.child(user.getUid()).child("bestscore").getValue().toString()) < score){
-                        myRef.child(user.getUid()).child("bestscore").setValue(score);
-                        myRef.child(user.getUid()).child("lastLevel").setValue(0);
-                    }
+                if(Float.parseFloat(dataSnapshot.child(user.getUid()).child("bestscore").getValue().toString()) < score){
+                    myRef.child(user.getUid()).child("bestscore").setValue(score);
+                }
+                myRef.child(user.getUid()).child("lastLevel").setValue(0);
             }
 
             @Override
@@ -47,11 +47,12 @@ public class FirebaseEntity {
 
     public static void saveLevelEnCours(int level,Mode mode){
 
+
+
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
 
 
-        mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("utilisateur");
 

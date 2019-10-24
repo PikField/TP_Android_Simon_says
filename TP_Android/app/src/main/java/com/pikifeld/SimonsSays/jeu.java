@@ -25,6 +25,7 @@ import com.pikifeld.SimonsSays.Entity.SQLite;
 import com.pikifeld.SimonsSays.Entity.User;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class jeu extends AppCompatActivity  {
 
@@ -81,9 +82,8 @@ public class jeu extends AppCompatActivity  {
         mp = (MediaPlayer) MediaPlayer.create(this,R.raw.sound);
         mp.setLooping(false);
 
-        datasource = new SQLite(this);
+        //datasource = new SQLite(this);
 
-        bouttonACliquer = new ArrayList<Integer>();
         vie = modeActuel.getVie();
 
         boutonCliquerUser = new ArrayList<>();
@@ -91,11 +91,7 @@ public class jeu extends AppCompatActivity  {
 
         chargerLevel(levelActuel);
 
-        score = (float)(modeActuel.getPoid()*((levelActuel-1)*modeActuel.getBlocMax()));
 
-        ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.mdoe)+": "+modeActuel.getNomMode()
-                +"\n"+getResources().getText(R.string.level)+": "+levelActuel
-                +"\n"+ getResources().getText(R.string.score)+": "+ score);
 
     }
 
@@ -120,7 +116,8 @@ public class jeu extends AppCompatActivity  {
         //datasource.saveLevel(user,levelActuel);
         //datasource.saveMode(user,modeActuel);
         //System.out.println(" ---- level sauvegarder pour "+user+" ------- "+datasource.getLastLevel(user));
-        FirebaseEntity.saveLevelEnCours(levelActuel,modeActuel);
+        if(vie>0)
+            FirebaseEntity.saveLevelEnCours(levelActuel,modeActuel);
 
         if(modeActuel.getNomMode().equals(Mode.Chrono))
             timer.cancel();
@@ -140,11 +137,12 @@ public class jeu extends AppCompatActivity  {
 
         boutonCliquerUser.add(bouttonClicker);
 
-        if(modeActuel.getNomMode().equals( Mode.Chrono.getNomMode()))
-            timer.cancel();
 
         if (verifierAIdemDebutB(boutonCliquerUser, bouttonACliquer) && boutonCliquerUser.size() == bouttonACliquer.size()) {
             boutonCliquerUser.clear();
+
+            if(modeActuel.getNomMode().equals( Mode.Chrono.getNomMode()))
+                timer.cancel();
 
             score = (float)(modeActuel.getPoid()*((levelActuel-1)*(modeActuel.getBlocMax()-modeActuel.getBlocMin())) + modeActuel.getPoid()* (bouttonACliquer.size()-modeActuel.getBlocMin()+1));
 
@@ -160,6 +158,9 @@ public class jeu extends AppCompatActivity  {
         }else{
             if(!verifierAIdemDebutB(boutonCliquerUser, bouttonACliquer)){
                 //chargerLevel(levelActuel);
+                if(modeActuel.getNomMode().equals(Mode.Chrono))
+                    timer.cancel();
+
                 boutonCliquerUser.clear();
                 perdreUneVie();
 
@@ -211,33 +212,37 @@ public class jeu extends AppCompatActivity  {
 
         tempRestant = bouttonACliquer.size()*2000;
 
+        String temps = String.format("%02d s", TimeUnit.MILLISECONDS.toSeconds(tempRestant));
         ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.mdoe) + ": " + modeActuel.getNomMode()
                 + "\n" + getResources().getText(R.string.level) + ": " + levelActuel
                 + "\n" + getResources().getText(R.string.score) + ": " + score
-                + "\n temps restant: " + tempRestant);
+                + "\nTemps restant: " + temps);
 
         timer = new CountDownTimer(tempRestant, 50) {
 
             public void onTick(long millisUntilFinished) {
                 System.out.println("passage chrono");
+                String temps = String.format("%02d s", TimeUnit.MILLISECONDS.toSeconds(tempRestant));
 
                 if(modeActuel.getNomMode().equals(Mode.Chrono.getNomMode())) {
                     tempRestant -= 50;
                     ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.mdoe) + ": " + modeActuel.getNomMode()
                             + "\n" + getResources().getText(R.string.level) + ": " + levelActuel
                             + "\n" + getResources().getText(R.string.score) + ": " + score
-                            + "\n temps restant: " + tempRestant);
+                            + "\nTemps restant: " + temps);
                 }
             }
 
             public void onFinish() {
 
+                String temps = String.format("%02d s", TimeUnit.MILLISECONDS.toSeconds(tempRestant));
+
                 if(modeActuel.getNomMode().equals(Mode.Chrono.getNomMode())) {
                     tempRestant -= 50;
                     ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.mdoe) + ": " + modeActuel.getNomMode()
                             + "\n" + getResources().getText(R.string.level) + ": " + levelActuel
                             + "\n" + getResources().getText(R.string.score) + ": " + score
-                            + "\n temps restant: " + tempRestant);
+                            + "\nTemps restant: " + temps);
                 }
                 perdreUneVie();
                 if(vie>=1){
@@ -353,12 +358,18 @@ public class jeu extends AppCompatActivity  {
                     break;
 
                 default:
-                    setContentView(R.layout.level2);
+                    setContentView(R.layout.level1);
                     chargerButton(4);
                     levelActuel = 1;
                     break;
 
             }
+
+            score = (float)(modeActuel.getPoid()*((levelActuel-1)*modeActuel.getBlocMax()));
+
+            ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.mdoe)+": "+modeActuel.getNomMode()
+                    +"\n"+getResources().getText(R.string.level)+": "+levelActuel
+                    +"\n"+ getResources().getText(R.string.score)+": "+ score);
 
             for(int i=0;i<modeActuel.getBlocMin()-1;i++){
                 ajouterUnBlock();
@@ -377,6 +388,8 @@ public class jeu extends AppCompatActivity  {
                 }
             }.start();
 
+
+
         }else{
             gameOver();
         }
@@ -390,6 +403,8 @@ public class jeu extends AppCompatActivity  {
         //datasource.saveBestScore(user,score);
 
         //datasource.saveLevel(user,-1);
+
+        levelActuel=0;
 
         FirebaseEntity.changeBestscore(score);
 
