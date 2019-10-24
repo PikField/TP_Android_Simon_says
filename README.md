@@ -2,7 +2,7 @@
  
 Jeu Simon pour android avec compte local (master) et Firebase (firebase)
 
-#Application
+# Application
 
 Jeu Simon avec différents niveaux et différentes difficultés.
 Toutes les données sont soit enregistrer en local pour la branche master, soit sous Firebase pour la branche firebase
