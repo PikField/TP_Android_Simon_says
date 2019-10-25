@@ -35,4 +35,15 @@
 
     <string name="reprendreSave">Reprendre ma dernière partie</string>
     <string name="profil">Profile</string>
+
+
+    <string name="mdoe">Mode </string>
+
+    <string name="homme">Homme</string>>
+    <string name="femme">Femme</string>
+    <string name="autre">Autre</string>
+
+
+    <string name="mot_de_passe_incorrect">Mot de passe trop court !</string>
+    <string name="authentification_incorrect">Authentification incorrect</string>
 </resources>

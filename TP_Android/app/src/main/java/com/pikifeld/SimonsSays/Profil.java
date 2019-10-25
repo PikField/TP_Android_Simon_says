@@ -55,7 +55,8 @@ public class Profil extends AppCompatActivity implements AdapterView.OnItemSelec
             textPseudo.setEnabled(false);
 
             ageSpin.setSelection(user.getAge());
-System.out.println("++++++++++++++++++++++++"+user.getSexe()+"eeeeeeeee"+user.getAge());
+            System.out.println("++++++++++++++++++++++++"+user.getSexe()+"eeeeeeeee"+user.getAge());
+
             switch (user.getSexe()){
                 case "Femme":
                     sexeSpin.setSelection(1);
@@ -65,7 +66,7 @@ System.out.println("++++++++++++++++++++++++"+user.getSexe()+"eeeeeeeee"+user.ge
                     break;
                 default:
                     sexeSpin.setSelection(2);
-                    break;²
+                    break;
             }
 
             ArrayList<String> listAge = new ArrayList<>();
@@ -92,6 +93,7 @@ System.out.println("++++++++++++++++++++++++"+user.getSexe()+"eeeeeeeee"+user.ge
             sexeSpin.setAdapter(sexeAdapt);
             sexeSpin.setOnItemSelectedListener(this);
 
+            updateVisual(user);
 
             sendButton.setOnClickListener(
                     new View.OnClickListener() {
@@ -148,6 +150,26 @@ System.out.println("++++++++++++++++++++++++"+user.getSexe()+"eeeeeeeee"+user.ge
         public void onNothingSelected(AdapterView<?> adapterView) {
 
         }
+
+
+    private void updateVisual(User user){
+        textNom.setText(user.getNom());
+        textPrenom.setText(user.getPrenom());
+        textPseudo.setText(user.getPseudo());
+        textMail.setText(user.getMail());
+
+        System.out.println(user.getAge()+ " -- "+user.getSexe());
+        ageSpin.setSelection(user.getAge());
+
+        switch (user.getSexe()){
+            case "Homme": sexeSpin.setSelection(0);
+                break;
+            case "Femme": sexeSpin.setSelection(1);
+                break;
+            default: sexeSpin.setSelection(2);
+                break;
+        }
+    }
     }
 
 

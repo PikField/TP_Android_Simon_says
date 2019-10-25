@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.media.ToneGenerator;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,11 +23,13 @@ import com.pikifeld.SimonsSays.Entity.Mode;
 import com.pikifeld.SimonsSays.Entity.SQLite;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class jeu extends AppCompatActivity  {
 
 
     static final int TIMER_ENTRE_ECLAIRAGE = 500;
+    static final int TIMER_ENTRE_LEVEL = 2000;
 
     Button button1,button2,button3,button4,button5,button6,button7,button8,button9,button10;
     Mode modeActuel;
@@ -45,6 +48,9 @@ public class jeu extends AppCompatActivity  {
     float score;
     CountDownTimer timer;
 
+    int tempRestant;
+    MediaPlayer mp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +65,7 @@ public class jeu extends AppCompatActivity  {
             levelActuel = bundle.getInt("level");
             if(levelActuel == 0)
                 levelActuel = 1;
-            
+
             pseudo = bundle.getString("pseudo");
             if(pseudo == null){
                 finish();
@@ -69,6 +75,10 @@ public class jeu extends AppCompatActivity  {
             finish();
             Toast.makeText(this, getResources().getText(R.string.Erreur), Toast.LENGTH_SHORT).show();
         }
+
+
+        mp = (MediaPlayer) MediaPlayer.create(this,R.raw.sound);
+        mp.setLooping(false);
 
 
         datasource = new SQLite(this);
@@ -104,8 +114,10 @@ public class jeu extends AppCompatActivity  {
     }
 
     private void saveLevel(){
-        datasource.saveLevel(pseudo,levelActuel);
-        datasource.saveMode(pseudo,modeActuel);
+        if(vie>0) {
+            datasource.saveLevel(pseudo, levelActuel);
+            datasource.saveMode(pseudo, modeActuel);
+        }
         System.out.println(" ---- level sauvegarder pour "+pseudo+" ------- "+datasource.getLastLevel(pseudo));
     }
 
@@ -116,16 +128,32 @@ public class jeu extends AppCompatActivity  {
         //ToneGenerator toneGenerator = new ToneGenerator(6,100);
         //toneGenerator.startTone(buttons.get(bouttonClicker).getTone(),200);
 
-        score = (float)(modeActuel.getPoid()*(levelActuel-1));
-        ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.level)+": "+levelActuel
-                                                        +"\n"+ getResources().getText(R.string.score)+": "+ score);
+        mp.start();
+
         boutonCliquerUser.add(bouttonClicker);
 
-        if(modeActuel.getNomMode().equals( Mode.Chrono.getNomMode()))
-            timer.cancel();
 
         if (verifierAIdemDebutB(boutonCliquerUser, bouttonACliquer) && boutonCliquerUser.size() == bouttonACliquer.size()) {
             boutonCliquerUser.clear();
+
+            if(modeActuel.getNomMode().equals( Mode.Chrono.getNomMode()))
+                timer.cancel();
+
+            score = (float)(modeActuel.getPoid()*((levelActuel-1)*(modeActuel.getBlocMax()-modeActuel.getBlocMin())) + modeActuel.getPoid()* (bouttonACliquer.size()-modeActuel.getBlocMin()+1));
+
+            if(!modeActuel.getNomMode().equals(Mode.Chrono.getNomMode()))
+                ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.mdoe)+": "+modeActuel.getNomMode()
+                        +"\n"+getResources().getText(R.string.level)+": "+levelActuel
+                        +"\n"+ getResources().getText(R.string.score)+": "+ score);
+            else{
+                tempRestant = bouttonACliquer.size()*2000;
+
+                String temps = String.format("%02d s", TimeUnit.MILLISECONDS.toSeconds(tempRestant));
+                ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.mdoe) + ": " + modeActuel.getNomMode()
+                        + "\n" + getResources().getText(R.string.level) + ": " + levelActuel
+                        + "\n" + getResources().getText(R.string.score) + ": " + score
+                        + "\nTemps restant: " + temps);
+            }
 
             try {
                 blockSuivant();
@@ -135,8 +163,11 @@ public class jeu extends AppCompatActivity  {
         }else{
             if(!verifierAIdemDebutB(boutonCliquerUser, bouttonACliquer)){
                 //chargerLevel(levelActuel);
+                if(modeActuel.getNomMode().equals(Mode.Chrono))
+                    timer.cancel();
+
                 boutonCliquerUser.clear();
-                vie--;
+                perdreUneVie();
 
                 blockButtons();
                 if(vie>0)
@@ -146,9 +177,6 @@ public class jeu extends AppCompatActivity  {
 
         setVisualVie();
 
-        if(vie<=0){
-            gameOver();
-        }
     }
 
     private boolean verifierAIdemDebutB(ArrayList<Integer> A, ArrayList<Integer> B){
@@ -187,18 +215,65 @@ public class jeu extends AppCompatActivity  {
 
     private void timerChronos(){
 
-        timer = new CountDownTimer(bouttonACliquer.size()*2000, 50) {
+        tempRestant = bouttonACliquer.size()*2000;
+
+        String temps = String.format("%02d s", TimeUnit.MILLISECONDS.toSeconds(tempRestant));
+        ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.mdoe) + ": " + modeActuel.getNomMode()
+                + "\n" + getResources().getText(R.string.level) + ": " + levelActuel
+                + "\n" + getResources().getText(R.string.score) + ": " + score
+                + "\nTemps restant: " + temps);
+
+        timer = new CountDownTimer(tempRestant, 50) {
 
             public void onTick(long millisUntilFinished) {
                 System.out.println("passage chrono");
+                String temps = String.format("%02d s", TimeUnit.MILLISECONDS.toSeconds(tempRestant));
+
+                if(modeActuel.getNomMode().equals(Mode.Chrono.getNomMode())) {
+                    tempRestant -= 50;
+                    ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.mdoe) + ": " + modeActuel.getNomMode()
+                            + "\n" + getResources().getText(R.string.level) + ": " + levelActuel
+                            + "\n" + getResources().getText(R.string.score) + ": " + score
+                            + "\nTemps restant: " + temps);
+                }
             }
 
             public void onFinish() {
-                gameOver();
+
+                String temps = String.format("%02d s", TimeUnit.MILLISECONDS.toSeconds(tempRestant));
+
+                if(modeActuel.getNomMode().equals(Mode.Chrono.getNomMode())) {
+                    tempRestant -= 50;
+                    ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.mdoe) + ": " + modeActuel.getNomMode()
+                            + "\n" + getResources().getText(R.string.level) + ": " + levelActuel
+                            + "\n" + getResources().getText(R.string.score) + ": " + score
+                            + "\nTemps restant: " + temps);
+                }
+                perdreUneVie();
+                if(vie>=1){
+                    allumerLumiere(0);
+                }
             }
         };
 
         timer.start();
+    }
+
+
+    private void perdreUneVie(){
+
+        vie--;
+        setVisualVie();
+        if(vie<=0){
+            gameOver();
+        }
+
+        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= 26)
+            vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
+        else
+            vibrator.vibrate(200);
+
     }
 
     private void allumerLumiere(final int num){
@@ -213,17 +288,19 @@ public class jeu extends AppCompatActivity  {
 
             public void onFinish() {
 
+                mp.start();
                 //toneGenerator.startTone(buttons.get(num).getTone());
                 new CountDownTimer(TIMER_ENTRE_ECLAIRAGE, 10) {
 
                     public void onTick(long millisUntilFinished) {
                         buttons.get(bouttonACliquer.get(num)).buttonLight(jeu.this);
+
                     }
 
                     public void onFinish() {
                         buttons.get(bouttonACliquer.get(num)).buttonDark(jeu.this);
                         int i = num + 1 ;
-                       // toneGenerator.stopTone();
+                        //toneGenerator.stopTone();
                         if(i<bouttonACliquer.size())
                             allumerLumiere(i);
                         else{
@@ -294,10 +371,16 @@ public class jeu extends AppCompatActivity  {
 
             }
 
+            score = (float)(modeActuel.getPoid()*((levelActuel-1)*modeActuel.getBlocMax()));
+
+            ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.mdoe)+": "+modeActuel.getNomMode()
+                    +"\n"+getResources().getText(R.string.level)+": "+levelActuel
+                    +"\n"+ getResources().getText(R.string.score)+": "+ score);
+
             for(int i=0;i<modeActuel.getBlocMin()-1;i++){
                 ajouterUnBlock();
             }
-            new CountDownTimer(TIMER_ENTRE_ECLAIRAGE, 10) {
+            new CountDownTimer(TIMER_ENTRE_LEVEL, 10) {
 
                 public void onTick(long millisUntilFinished) {
                 }
@@ -311,12 +394,13 @@ public class jeu extends AppCompatActivity  {
                 }
             }.start();
 
+
+
         }else{
             gameOver();
         }
 
         setVisualVie();
-
     }
 
     private void gameOver(){
