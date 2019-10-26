@@ -29,6 +29,7 @@
     <string name="Erreur">Une erreur est apparue. Veuillez réessayer.</string>
     <string name="score">Score</string>
     <string name="level">Niveau</string>
+
     <string name="mdoe">Mode </string>
 
     <string name="quitter">Revenir au menu principal</string>
@@ -42,4 +43,10 @@
 
     <string name="mot_de_passe_incorrect">Mot de passe trop court !</string>
     <string name="authentification_incorrect">Authentification incorrect</string>
+
+
+    <string name="save">Enregistrer</string>
+    <string name="game_over">Game Over !</string>
+    <string name="you_loose">Vous avez perdu(e)!</string>
+    <string name="temps_restant">Temps restant</string>
 </resources>

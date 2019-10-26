@@ -46,7 +46,7 @@ public class Profil extends AppCompatActivity {
         ageSpin=findViewById(R.id.spinner2);
         sexeSpin=findViewById(R.id.spinner);
 
-        sendButton.setText("Enregistrer");
+        sendButton.setText(getResources().getText(R.string.save));
 
         textPseudo.setEnabled(false);
 
