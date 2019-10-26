@@ -26,10 +26,30 @@ public class MenuPrincipale extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.textBienvenue)).setText(getResources().getText(R.string.Bienvenue)+" "+pseudo);
 
+        update();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        update();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        update();
+    }
+
+    public void update(){
+
         datasource = new SQLite(this);
 
         if(datasource.getLastMode(pseudo) == "" || datasource.getLastLevel(pseudo) == 0)
             findViewById(R.id.reprendreSave).setVisibility(View.GONE);
+        else
+            findViewById(R.id.reprendreSave).setVisibility(View.VISIBLE);
+
 
         ((Button) findViewById(R.id.modeFacile)).setOnClickListener(new View.OnClickListener() {
             @Override

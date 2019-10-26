@@ -51,6 +51,8 @@ public class jeu extends AppCompatActivity  {
     int tempRestant;
     MediaPlayer mp;
 
+    boolean estEnJeu = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,13 +94,15 @@ public class jeu extends AppCompatActivity  {
         chargerLevel(levelActuel);
 
         score = (float)(modeActuel.getPoid()*(levelActuel-1));
-        ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.level)+": "+levelActuel
+        ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.mdoe)+": "+modeActuel.getNomMode()
+                +"\n"+getResources().getText(R.string.level)+": "+levelActuel
                 +"\n"+ getResources().getText(R.string.score)+": "+ score);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        estEnJeu =true;
     }
 
     @Override
@@ -118,7 +122,15 @@ public class jeu extends AppCompatActivity  {
             datasource.saveLevel(pseudo, levelActuel);
             datasource.saveMode(pseudo, modeActuel);
         }
+
+        if(modeActuel.getNomMode().equals(Mode.Chrono))
+            timer.cancel();
+
+        mp.reset();
+
         System.out.println(" ---- level sauvegarder pour "+pseudo+" ------- "+datasource.getLastLevel(pseudo));
+        estEnJeu = false;
+        finish();
     }
 
     public void clickBoutton(final int bouttonClicker) {
@@ -141,6 +153,14 @@ public class jeu extends AppCompatActivity  {
 
             score = (float)(modeActuel.getPoid()*((levelActuel-1)*(modeActuel.getBlocMax()-modeActuel.getBlocMin())) + modeActuel.getPoid()* (bouttonACliquer.size()-modeActuel.getBlocMin()+1));
 
+
+
+            try {
+                blockSuivant();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             if(!modeActuel.getNomMode().equals(Mode.Chrono.getNomMode()))
                 ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.mdoe)+": "+modeActuel.getNomMode()
                         +"\n"+getResources().getText(R.string.level)+": "+levelActuel
@@ -152,18 +172,13 @@ public class jeu extends AppCompatActivity  {
                 ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.mdoe) + ": " + modeActuel.getNomMode()
                         + "\n" + getResources().getText(R.string.level) + ": " + levelActuel
                         + "\n" + getResources().getText(R.string.score) + ": " + score
-                        + "\nTemps restant: " + temps);
+                        + "\n"+getResources().getText(R.string.temps_restant)+": " + temps);
             }
 
-            try {
-                blockSuivant();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }else{
             if(!verifierAIdemDebutB(boutonCliquerUser, bouttonACliquer)){
                 //chargerLevel(levelActuel);
-                if(modeActuel.getNomMode().equals(Mode.Chrono))
+                if(modeActuel.getNomMode().equals(Mode.Chrono.getNomMode()))
                     timer.cancel();
 
                 boutonCliquerUser.clear();
@@ -221,7 +236,7 @@ public class jeu extends AppCompatActivity  {
         ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.mdoe) + ": " + modeActuel.getNomMode()
                 + "\n" + getResources().getText(R.string.level) + ": " + levelActuel
                 + "\n" + getResources().getText(R.string.score) + ": " + score
-                + "\nTemps restant: " + temps);
+                + "\n"+getResources().getText(R.string.temps_restant)+": " + temps);
 
         timer = new CountDownTimer(tempRestant, 50) {
 
@@ -234,20 +249,20 @@ public class jeu extends AppCompatActivity  {
                     ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.mdoe) + ": " + modeActuel.getNomMode()
                             + "\n" + getResources().getText(R.string.level) + ": " + levelActuel
                             + "\n" + getResources().getText(R.string.score) + ": " + score
-                            + "\nTemps restant: " + temps);
+                            + "\n"+getResources().getText(R.string.temps_restant)+": " + temps);
                 }
             }
 
             public void onFinish() {
 
-                String temps = String.format("%02d s", TimeUnit.MILLISECONDS.toSeconds(tempRestant));
+                String temps = String.format("%02d s", TimeUnit.MILLISECONDS.toSeconds(bouttonACliquer.size()*2000));
 
                 if(modeActuel.getNomMode().equals(Mode.Chrono.getNomMode())) {
                     tempRestant -= 50;
                     ((TextView) findViewById(R.id.textView)).setText(getResources().getText(R.string.mdoe) + ": " + modeActuel.getNomMode()
                             + "\n" + getResources().getText(R.string.level) + ": " + levelActuel
                             + "\n" + getResources().getText(R.string.score) + ": " + score
-                            + "\nTemps restant: " + temps);
+                            + "\n"+getResources().getText(R.string.temps_restant)+": " + temps);
                 }
                 perdreUneVie();
                 if(vie>=1){
@@ -305,7 +320,7 @@ public class jeu extends AppCompatActivity  {
                             allumerLumiere(i);
                         else{
                             unBlockButons();
-                            if(modeActuel.getNomMode().equals( Mode.Chrono.getNomMode()))
+                            if(modeActuel.getNomMode().equals( Mode.Chrono.getNomMode()) && estEnJeu)
                                 timerChronos();
                         }
                     }
@@ -407,7 +422,7 @@ public class jeu extends AppCompatActivity  {
 
         datasource.saveBestScore(pseudo,score);
 
-        datasource.saveLevel(pseudo,-1);
+        datasource.saveLevel(pseudo,0);
 
         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         if (Build.VERSION.SDK_INT >= 26)
@@ -416,12 +431,12 @@ public class jeu extends AppCompatActivity  {
             vibrator.vibrate(200);
 
         new AlertDialog.Builder(this)
-                .setTitle("Game Over")
-                .setMessage("Vous avez perdu(e) !\n SCORE: "+score+" \n ")
+                .setTitle(getResources().getText(R.string.game_over))
+                .setMessage(getResources().getText(R.string.you_loose)+"\n"+getResources().getText(R.string.score)+": "+score+" \n ")
 
                 // Specifying a listener allows you to take an action before dismissing the dialog.
                 // The dialog is automatically dismissed when a dialog button is clicked.
-                .setPositiveButton("Voir tout les score", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getText(R.string.voirScore), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(jeu.this,ScoreBoard.class);
                         intent.putExtra("pseudo",pseudo);
@@ -440,7 +455,7 @@ public class jeu extends AppCompatActivity  {
                     }
                 })
                 // A null listener allows the button to dismiss the dialog and take no further action.
-                .setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getText(R.string.quitter), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         finish();

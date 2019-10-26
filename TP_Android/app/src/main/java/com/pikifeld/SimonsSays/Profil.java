@@ -1,6 +1,7 @@
 package com.pikifeld.SimonsSays;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -53,6 +54,9 @@ public class Profil extends AppCompatActivity implements AdapterView.OnItemSelec
             textPseudo.setText(user.getPseudo());
             textMail.setText(user.getMail());
             textPseudo.setEnabled(false);
+            textPseudo.setTextColor(Color.GRAY);
+
+            sendButton.setText(getResources().getText(R.string.save));
 
             ageSpin.setSelection(user.getAge());
             System.out.println("++++++++++++++++++++++++"+user.getSexe()+"eeeeeeeee"+user.getAge());
@@ -110,17 +114,12 @@ public class Profil extends AppCompatActivity implements AdapterView.OnItemSelec
                                 Toast.makeText(getApplicationContext(),"Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show();
                             }else{
                                 if(mdp.equals(mdpBis)) {
-
-
                                     long value = data.changeProfile(name, surname, age, sexe, pseudo, mail, mdp);
                                     if (value==-1){
                                         Toast.makeText(getApplicationContext(),"Le pseudo choisit existe déjà, veuiller en utiliser un autre", Toast.LENGTH_SHORT).show();
                                     }else{
                                         Toast.makeText(getApplicationContext(),"Modifications réussis", Toast.LENGTH_SHORT).show();
-
-                                        Intent Menu = new Intent(com.pikifeld.SimonsSays.Profil.this, MenuPrincipale.class);
-                                        Menu.putExtra("pseudo",pseudo);
-                                        startActivity(Menu);
+                                        finish();
                                     }
 
                                 }else{

@@ -1,5 +1,6 @@
 package com.pikifeld.SimonsSays;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import com.pikifeld.SimonsSays.Entity.SQLite;
 public class connexion extends AppCompatActivity {
     String pseudo;
     String mdp;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,11 @@ public class connexion extends AppCompatActivity {
 
         final SQLite data = new SQLite(this);
 
+
+        progressDialog=new ProgressDialog(connexion.this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("Accès à votre compte...");
+        progressDialog.setIndeterminate(true);
 
         setContentView(R.layout.connexion);
 
@@ -33,6 +40,8 @@ public class connexion extends AppCompatActivity {
         buttonConnexion.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
+
+
                         pseudo= textPseudo.getText().toString();
                         mdp= textMDP.getText().toString();
 
@@ -47,6 +56,7 @@ public class connexion extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),"Mot de passe incorect", Toast.LENGTH_SHORT).show();
                                 break;
                             case 0 :
+                                progressDialog.show();
                                 Toast.makeText(getApplicationContext(),"Authentification réussi", Toast.LENGTH_SHORT).show();
                                 Intent Menu = new Intent(connexion.this, MenuPrincipale.class);
                                 Menu.putExtra("pseudo", pseudo);
@@ -71,6 +81,12 @@ public class connexion extends AppCompatActivity {
                     }
                 }
         );
+
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        progressDialog.dismiss();
+    }
 }

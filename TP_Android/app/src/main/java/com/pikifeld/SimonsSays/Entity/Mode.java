@@ -12,6 +12,10 @@ public class Mode implements Parcelable{
     private String nomMode;
 
 
+    public static final Mode Facile = new Mode(1,8,0,2,1,"Facile");
+    public static final Mode Difficile = new Mode(3,12,0,2,1.5,"Difficile");
+    public static final Mode Expert = new Mode(5,15,0,3,2,"Expert");
+    public static final Mode Chrono = new Mode(1,10,2,3,1.5,"Chrono");
 
 
     public Mode(int blocMin,int blocMax,int tempsReponse, int vie,double poid){
@@ -32,10 +36,6 @@ public class Mode implements Parcelable{
         this.nomMode = nomMode;
     }
 
-    public static final Mode Facile = new Mode(1,8,0,2,1,"Facile");
-    public static final Mode Difficile = new Mode(3,12,0,2,1.5,"Difficile");
-    public static final Mode Expert = new Mode(5,15,0,3,2,"Expert");
-    public static final Mode Chrono = new Mode(1,10,2,3,1.5,"Chrono");
 
     public double getPoid() {
         return poid;
