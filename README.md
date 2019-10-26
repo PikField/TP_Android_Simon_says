@@ -1,4 +1,4 @@
-[Image](images/ic_launcher_1.png)
+![Image](images/ic_launcher_1.png)
 # TP_Android_Simon_says [Android] #TP ESIEE-Amiens
  
 Jeu Simon pour android avec compte local (master) et Firebase (firebase)
